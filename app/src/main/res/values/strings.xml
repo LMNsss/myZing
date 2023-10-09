@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyZing</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="library">Thư viện</string>
+    <string name="listen_no_advertisement">NGHE NHẠC KHÔNG QUẢNG CÁO</string>
+    <string name="zingmp3_plus_package_for_only_19000">Gói ZingMP3 Plus chỉ 19000/tháng</string>
+    <string name="discovery">Khám phá</string>
+    <string name="profile">Cá nhân</string>
+</resources>

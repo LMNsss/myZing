@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/btn_library"
+        android:icon="@drawable/icon_list_music_page"
+        android:title="@string/library"/>
+    <item
+        android:id="@+id/btn_discovery"
+        android:icon="@drawable/icon_list_music_page"
+        android:title="@string/discovery" />
+    <item
+        android:id="@+id/btn_zing_chart"
+        android:icon="@drawable/icon_list_music_page"
+        android:title="#Zingchart" />
+    <item
+        android:id="@+id/btn_radio"
+        android:icon="@drawable/icon_list_music_page"
+        android:title="Radio" />
+    <item
+        android:id="@+id/btn_profile"
+        android:icon="@drawable/icon_list_music_page"
+        android:title="@string/profile" />
+
+</menu>
