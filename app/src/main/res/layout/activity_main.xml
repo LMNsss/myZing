@@ -4,17 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <!--    <androidx.fragment.app.FragmentContainerView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:background="@color/white"-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" >-->
-    <!--    </androidx.fragment.app.FragmentContainerView>-->
+    tools:context=".ui.MainActivity">
 
     <FrameLayout
         android:id="@+id/home_container"
@@ -32,13 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
-            />
+            app:navGraph="@navigation/nav_graph_home" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_song"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:layout_gravity="bottom">
+            android:layout_gravity="bottom"
+            android:background="@color/white">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/img_song"
@@ -49,20 +40,22 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/song_background"/>
+                    android:src="@drawable/img_song_background" />
             </com.google.android.material.card.MaterialCardView>
+
             <LinearLayout
+                android:id="@+id/layout_info_song"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/layout_info_song"
                 android:layout_marginStart="10dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/img_song"
-                android:orientation="vertical">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_singer_name"
@@ -80,54 +73,57 @@
             </LinearLayout>
 
 
-
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_love"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:id="@+id/ic_love"
                 android:layout_marginEnd="15dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_heart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/ic_play"
-                android:src="@drawable/heart"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_play"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:id="@+id/ic_play"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginEnd="15dp"
+                android:src="@drawable/ic_pause"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/ic_next_song"
-                android:src="@drawable/heart"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_next_song"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:id="@+id/ic_next_song"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/ic_step_forward"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="15dp"
-                android:src="@drawable/heart"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:itemIconSize="20dp"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation" />
+        app:menu="@menu/bottom_navigation">
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD" />
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

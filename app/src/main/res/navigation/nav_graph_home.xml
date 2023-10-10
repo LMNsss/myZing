@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main_fragment"
+    app:startDestination="@id/discoveryFragment">
+
+    <fragment
+        android:id="@+id/discoveryFragment"
+        android:name="com.ngoclm.myzing.ui.discovery.DiscoveryFragment"
+        android:label="fragment_discovery"
+        tools:layout="@layout/fragment_discovery" >
+        <action
+            android:id="@+id/openDiscovery"
+            app:destination="@id/discoveryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.ngoclm.myzing.ui.library.LibraryFragment"
+        android:label="fragment_library"
+        tools:layout="@layout/fragment_library" />
+    <fragment
+        android:id="@+id/zingchartFragment"
+        android:name="com.ngoclm.myzing.ui.zingchart.ZingchartFragment"
+        android:label="fragment_zingchart"
+        tools:layout="@layout/fragment_zingchart" />
+    <fragment
+        android:id="@+id/radioFragment"
+        android:name="com.ngoclm.myzing.ui.radio.RadioFragment"
+        android:label="fragment_radio"
+        tools:layout="@layout/fragment_radio" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ngoclm.myzing.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <action
+        android:id="@+id/openRadio"
+        app:destination="@id/radioFragment" />
+    <action
+        android:id="@+id/openLibrary"
+        app:destination="@id/libraryFragment" />
+    <action
+        android:id="@+id/openZingChart"
+        app:destination="@id/zingchartFragment" />
+    <action
+        android:id="@+id/openProfile"
+        app:destination="@id/profileFragment" />
+</navigation>
