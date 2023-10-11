@@ -26,6 +26,6 @@
         app:layout_constraintTop_toBottomOf="@id/card_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Bài Hát Nghe Gần Đây" />
+        android:text="Đếm ngày xa em" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

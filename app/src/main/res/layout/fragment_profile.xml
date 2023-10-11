@@ -1,14 +1,474 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="profile" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_line_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.03" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_line_97"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.97" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_line_50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/header_tool"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/guide_line_97"
+                app:layout_constraintStart_toStartOf="@id/guide_line_3"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ic_noitice"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_noitice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_noitice"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ic_search"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/avatar_user"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="45dp"
+                app:layout_constraintStart_toStartOf="@id/guide_line_3"
+                app:layout_constraintTop_toBottomOf="@id/header_tool">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_song_background" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:id="@+id/layout_info_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/avatar_user"
+                app:layout_constraintStart_toEndOf="@id/avatar_user"
+                app:layout_constraintTop_toTopOf="@+id/avatar_user">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_namme_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lê Minh Ngọc"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_class_user"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#BCBCBC"
+                            android:letterSpacing="0.1"
+                            android:paddingStart="8dp"
+                            android:paddingTop="2dp"
+                            android:paddingEnd="8dp"
+                            android:paddingBottom="2dp"
+                            android:text="@string/basic"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_upgrade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/upgrade_class" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/rv_upgrade_class"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guide_line_3"
+                app:layout_constraintTop_toBottomOf="@id/avatar_user">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_layout_class_plus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E3DBF1"
+                        android:padding="10dp">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guide_line_layout_class_plus_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.03" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guide_line_layout_class_plus_97"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.97" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_Zing_MP3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="Zing MP3"
+                            android:textColor="#985EFF"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@id/guide_line_layout_class_plus_3"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_class"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:cardCornerRadius="6dp"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_Zing_MP3"
+                            app:layout_constraintStart_toEndOf="@id/tv_Zing_MP3"
+                            app:layout_constraintTop_toTopOf="@id/tv_Zing_MP3">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_class"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#985EFF"
+                                android:letterSpacing="0.1"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:text="@string/plus"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ic_go_next"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_angle_small_right"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_Zing_MP3"
+                            app:layout_constraintEnd_toEndOf="@id/guide_line_layout_class_plus_97"
+                            app:layout_constraintTop_toTopOf="@id/tv_Zing_MP3" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_price_class"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="19,000 cho 3 tháng đầu"
+                            android:textColor="@color/black"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@id/guide_line_layout_class_plus_3"
+                            app:layout_constraintTop_toBottomOf="@id/tv_Zing_MP3" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_conntent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/highest_quality_and_no_ad"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="@id/guide_line_layout_class_plus_97"
+                            app:layout_constraintStart_toStartOf="@id/guide_line_layout_class_plus_3"
+                            app:layout_constraintTop_toBottomOf="@id/tv_price_class" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            app:layout_constraintEnd_toEndOf="@id/guide_line_layout_class_plus_97"
+                            app:layout_constraintStart_toStartOf="@id/guide_line_layout_class_plus_3"
+                            app:layout_constraintTop_toBottomOf="@id/tv_conntent">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_ad"
+                                android:drawablePadding="5dp"
+                                android:text="@string/listen_music_no_ad"
+                                android:textAlignment="center" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_waveform"
+                                android:drawablePadding="5dp"
+                                android:text="@string/listen_and_dowload_lossless_music"
+                                android:textAlignment="center" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableTop="@drawable/ic_download"
+                                android:drawablePadding="5dp"
+                                android:text="@string/unlimited_storage"
+                                android:textAlignment="center" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.core.widget.NestedScrollView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_experience_listening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/high_experience"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/guide_line_3"
+                app:layout_constraintTop_toBottomOf="@id/rv_upgrade_class" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_loss_less"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="@id/guide_line_97"
+                app:layout_constraintStart_toStartOf="@id/guide_line_50"
+                app:layout_constraintTop_toBottomOf="@id/tv_experience_listening">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_loss_less"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_wave_sine"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_loss_less"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/crossfade"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ic_loss_less" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_crossfade"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/white"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="@id/guide_line_50"
+                app:layout_constraintStart_toStartOf="@id/guide_line_3"
+                app:layout_constraintTop_toBottomOf="@id/tv_experience_listening">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_crossfade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_waveform"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_crossfade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/high_quality_sound"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ic_crossfade" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/guide_line_97"
+                app:layout_constraintStart_toStartOf="@id/guide_line_3"
+                app:layout_constraintTop_toBottomOf="@id/layout_loss_less">
+
+                <TextView
+                    android:id="@+id/tv_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/services"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_save_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="10dp"
+                    android:text="@string/save_data"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_network" />
+
+                <TextView
+                    android:id="@+id/tv_input_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:drawablePadding="10dp"
+                    android:text="@string/input_code"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_mobile_button" />
+
+                <TextView
+                    android:id="@+id/tv_individual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:text="@string/profile"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_care_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="10dp"
+                    android:text="@string/care_list"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_care_list" />
+
+                <TextView
+                    android:id="@+id/tv_block_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:drawablePadding="10dp"
+                    android:text="@string/block_list"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_list_block" />
+
+                <TextView
+                    android:id="@+id/tv_hint_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:drawablePadding="10dp"
+                    android:text="@string/hide_list"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_hide_list" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

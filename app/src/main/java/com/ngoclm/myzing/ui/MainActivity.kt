@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        binding.layoutSong.setOnClickListener(){
+        binding.miniPlayerMusic.setOnClickListener(){
 
         }
     }

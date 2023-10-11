@@ -7,4 +7,20 @@
     <string name="zingmp3_plus_package_for_only_19000">Gói ZingMP3 Plus chỉ 19000/tháng</string>
     <string name="discovery">Khám phá</string>
     <string name="profile">Cá nhân</string>
+    <string name="hide_list">Danh sách ẩn</string>
+    <string name="block_list">Danh sách chặn</string>
+    <string name="care_list">Danh sách quan tâm</string>
+    <string name="input_code">Nhập Code</string>
+    <string name="save_data">Tiết kiệm 3G/4G truy cập</string>
+    <string name="services">Dịch vụ</string>
+    <string name="high_quality_sound">Âm thanh vượt trội (Lossless)</string>
+    <string name="crossfade">Chuyển bài mượt mà (Crossfade)</string>
+    <string name="high_experience">Trải nghiệm nghe nhạc nâng cao</string>
+    <string name="unlimited_storage">Lưu trữ nhạc không giới hạn</string>
+    <string name="listen_and_dowload_lossless_music">Nghe và tải nhạc Lossless</string>
+    <string name="listen_music_no_ad">Nghe nhạc không quảng cáo</string>
+    <string name="highest_quality_and_no_ad">Nghe nhạc với chất lượng cao nhất, không quảng cáo</string>
+    <string name="plus">PLUS</string>
+    <string name="upgrade_class">Nâng cấp gói</string>
+    <string name="basic">BASIC</string>
 </resources>
