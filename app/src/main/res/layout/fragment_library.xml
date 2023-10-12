@@ -27,6 +27,13 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.97" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline_vertical_0.5"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_header"
                 android:layout_width="0dp"
@@ -75,7 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:cardCornerRadius="5dp"
+                app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.97"
                 app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.03"
                 app:layout_constraintTop_toBottomOf="@id/layout_header">
@@ -153,7 +160,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_love_song"
@@ -388,16 +396,25 @@
                 app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.03"
                 app:layout_constraintTop_toBottomOf="@id/tv_listen_recently" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ic_menu_playlist"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.97"
+                app:layout_constraintTop_toTopOf="@id/tab_layout"
+                app:layout_constraintBottom_toBottomOf="@id/tab_layout"
+                android:src="@drawable/ic_menu_dots_vertical"/>
+
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.97"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.5"
                 app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.03"
                 app:layout_constraintTop_toBottomOf="@id/rv_listen_recently" />
 
             <androidx.viewpager2.widget.ViewPager2
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/view_pager"
                 app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.03"
