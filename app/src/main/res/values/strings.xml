@@ -23,4 +23,7 @@
     <string name="plus">PLUS</string>
     <string name="upgrade_class">Nâng cấp gói</string>
     <string name="basic">BASIC</string>
+    <string name="listen_recently">Nghe gần đây</string>
+    <string name="dowloaded">Đã tải</string>
+    <string name="artist">Nghệ sỹ</string>
 </resources>
