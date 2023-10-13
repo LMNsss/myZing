@@ -28,11 +28,11 @@
                 app:layout_constraintGuide_percent="0.97" />
 
             <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_0.5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/guideline_vertical_0.5"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5"/>
+                app:layout_constraintGuide_percent="0.5" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_header"
@@ -397,13 +397,13 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_listen_recently" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_menu_playlist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ic_menu_playlist"
-                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.97"
-                app:layout_constraintTop_toTopOf="@id/tab_layout"
+                android:src="@drawable/ic_menu_dots_vertical"
                 app:layout_constraintBottom_toBottomOf="@id/tab_layout"
-                android:src="@drawable/ic_menu_dots_vertical"/>
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.97"
+                app:layout_constraintTop_toTopOf="@id/tab_layout" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
@@ -414,13 +414,13 @@
                 app:layout_constraintTop_toBottomOf="@id/rv_listen_recently" />
 
             <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/view_pager"
-                app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.03"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.97"
-                app:layout_constraintTop_toBottomOf="@id/tab_layout"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.03"
+                app:layout_constraintTop_toBottomOf="@id/tab_layout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

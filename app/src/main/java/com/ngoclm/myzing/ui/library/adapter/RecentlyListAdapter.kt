@@ -1,5 +1,6 @@
 package com.ngoclm.myzing.ui.library.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,9 +9,9 @@ import com.ngoclm.myzing.base.entities.Song
 import com.ngoclm.myzing.databinding.RecentlyListItemBinding
 import com.ngoclm.myzing.base.interaction.onClickListener
 
-class RecentlyListAdapter(private var ds: List<Song>,
-                          private var buttonClickListener: onClickListener
+class RecentlyListAdapter( private var buttonClickListener: onClickListener
 ) : RecyclerView.Adapter<RecentlyListAdapter.ListSongViewHolder>() {
+    private var ds:List<Song> = listOf()
     inner class ListSongViewHolder(var binding: RecentlyListItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -36,5 +37,9 @@ class RecentlyListAdapter(private var ds: List<Song>,
                 buttonClickListener.onClickItem(it, position)
             }
         }
+    }
+    fun setSong(ds: List<Song>){
+        this.ds = ds
+        notifyDataSetChanged()
     }
 }
