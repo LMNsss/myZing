@@ -7,17 +7,19 @@ import androidx.room.RoomDatabase
 import com.ngoclm.myzing.base.DAO.SongDao
 import com.ngoclm.myzing.base.entities.Song
 
-@Database(entities = [Song::class], version = 1 )
-abstract class SongDatabase: RoomDatabase() {
+@Database(entities = [Song::class], version = 1)
+abstract class SongDatabase : RoomDatabase() {
     abstract fun getSongDao(): SongDao
 
-    companion object{
+    companion object {
         @Volatile
-        private var instance : SongDatabase? = null
+        private var instance: SongDatabase? = null
 
         fun getInstance(context: Context): SongDatabase {
-            if (instance == null){
-                instance = Room.databaseBuilder(context, SongDatabase::class.java, "song_table").build()
+            if (instance == null) {
+                instance = Room.databaseBuilder(
+                    context.applicationContext, SongDatabase::class.java, "AppDB"
+                ).allowMainThreadQueries().build()
             }
             return instance!!
         }

@@ -32,7 +32,7 @@ class RecentlyListAdapter( private var buttonClickListener: onClickListener
             Glide.with(holder.itemView.context)
                 .load(ds[position].img)
                 .into(imgRecentlySong)
-
+            tvListenRecentlySong.text = ds[position].songName
             holder.itemView.setOnClickListener() {
                 buttonClickListener.onClickItem(it, position)
             }

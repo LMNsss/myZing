@@ -1,13 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.library.playlist_and_album.PlayListFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <data>
 
+    </data>
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/dimen_10dp"
+        tools:context=".ui.library.playlist_and_album.PlayListFragment">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layout_create_play_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_create_playlist"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:cardBackgroundColor="#D5D5D5"
+                app:cardCornerRadius="8dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_create_play_list"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_plus" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_create_play_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:text="@string/create_playlist"
+                android:textSize="@dimen/tv_18"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_play_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_create_play_list" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_suggestion_for_you"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/suggestion_for_you"
+            android:textSize="@dimen/tv_18"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_play_list" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_rely_on_personal_library"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rely_on_personal_library"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_suggestion_for_you" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_suggestion_for_you"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_rely_on_personal_library" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="100dp"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginEnd="20dp">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="100dp"
@@ -11,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardCornerRadius="5dp">
+        app:cardCornerRadius="8dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_recently_song"
@@ -23,6 +24,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/tv_listen_recently_song"
         app:layout_constraintTop_toBottomOf="@id/card_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

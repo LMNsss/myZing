@@ -26,4 +26,9 @@
     <string name="listen_recently">Nghe gần đây</string>
     <string name="dowloaded">Đã tải</string>
     <string name="artist">Nghệ sỹ</string>
+    <string name="premium">PREMIUM</string>
+    <string name="price_of_premium">49,000đ</string>
+    <string name="create_playlist">Tạo playlist</string>
+    <string name="suggestion_for_you">Gợi ý cho bạn</string>
+    <string name="rely_on_personal_library">Dựa trên lịch sử và thư viện cá nhân</string>
 </resources>
