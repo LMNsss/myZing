@@ -38,6 +38,7 @@
                 android:id="@+id/header_tool"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
                 app:layout_constraintEnd_toEndOf="@id/guide_line_97"
                 app:layout_constraintStart_toStartOf="@id/guide_line_3"
                 app:layout_constraintTop_toTopOf="parent">
@@ -162,8 +163,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/guide_line_3"
                 app:layout_constraintTop_toBottomOf="@id/avatar_user">
 
