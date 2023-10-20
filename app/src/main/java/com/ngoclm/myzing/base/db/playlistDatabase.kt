@@ -25,7 +25,5 @@ abstract class PlaylistDatabase : RoomDatabase() {
             return instance!!
         }
 
-
-
     }
 }

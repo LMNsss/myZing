@@ -16,7 +16,7 @@ class PlaylistRepository(app: Application) {
         playlistDao = playlistDatabase.getPlaylist()
     }
     suspend fun insertPlaylist(playlist: Playlist) = playlistDao.insertPlaylist(playlist)
-    suspend fun updateSong(playlist: Playlist) = playlistDao.updatePlaylist(playlist)
+    suspend fun updatePlayList(playlist: Playlist) = playlistDao.updatePlaylist(playlist)
     suspend fun deleteSong(playlist: Playlist) = playlistDao.deletePlaylist(playlist)
 
     fun getAllPlaylist(): LiveData<List<Playlist>> = playlistDao.getAllPlaylist()
