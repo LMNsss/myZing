@@ -2,4 +2,5 @@
 <resources>
     <dimen name="tv_18">18sp</dimen>
     <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="tv_16">16sp</dimen>
 </resources>

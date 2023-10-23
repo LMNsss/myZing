@@ -9,5 +9,6 @@ data class Playlist(
     @PrimaryKey(autoGenerate = true)  @ColumnInfo(name = "id_playlist") val id: Int = 0,
     @ColumnInfo(name = "img_playlist_col") val img: String,
     @ColumnInfo(name = "name_playlist_col") val playlistName: String,
+    @ColumnInfo(name = "info_source_col") val infoSource: String
 
 )

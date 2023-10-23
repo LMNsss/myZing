@@ -6,11 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ngoclm.myzing.base.entities.Playlist
-import com.ngoclm.myzing.base.entities.Song
 import com.ngoclm.myzing.base.interaction.onClickListener
 import com.ngoclm.myzing.databinding.ItemPlayListBinding
-import com.ngoclm.myzing.databinding.ItemPlayListBindingImpl
-import com.ngoclm.myzing.databinding.RecentlyListItemBinding
 
 class PlaylistAdapter(
     private var buttonClickListener: onClickListener
@@ -38,6 +35,7 @@ class PlaylistAdapter(
                 .load(ds[position].img)
                 .into(imgPlayList)
             tvPlayListName.text = ds[position].playlistName
+            infoSource.text = ds[position].infoSource
             holder.itemView.setOnClickListener() {
                 buttonClickListener.onClickItem(it, position)
             }

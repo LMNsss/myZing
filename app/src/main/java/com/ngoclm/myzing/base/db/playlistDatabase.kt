@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ngoclm.myzing.base.DAO.PlaylistDao
 import com.ngoclm.myzing.base.entities.Playlist
-import com.ngoclm.myzing.base.entities.Song
 
 @Database(entities = [Playlist::class], version = 1)
 abstract class PlaylistDatabase : RoomDatabase() {
