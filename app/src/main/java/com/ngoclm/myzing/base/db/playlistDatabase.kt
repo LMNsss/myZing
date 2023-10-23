@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ngoclm.myzing.base.DAO.PlaylistDao
-import com.ngoclm.myzing.base.DAO.SongDao
+import com.ngoclm.myzing.base.entities.Playlist
 import com.ngoclm.myzing.base.entities.Song
 
-@Database(entities = [Song::class], version = 1)
+@Database(entities = [Playlist::class], version = 1)
 abstract class PlaylistDatabase : RoomDatabase() {
     abstract fun getPlaylist(): PlaylistDao
 
@@ -19,7 +19,7 @@ abstract class PlaylistDatabase : RoomDatabase() {
         fun getInstance(context: Context): PlaylistDatabase {
             if (instance == null) {
                 instance = Room.databaseBuilder(
-                    context.applicationContext, PlaylistDatabase::class.java, "AppDB"
+                    context.applicationContext, PlaylistDatabase::class.java, "AppDB1"
                 ).allowMainThreadQueries().build()
             }
             return instance!!

@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.ngoclm.myzing.base.entities.Playlist
+
 @Dao
 interface PlaylistDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -20,6 +21,6 @@ interface PlaylistDao {
     fun deletePlaylist(playlist: Playlist)
 
 
-    @Query("SELECT * FROM playlist_table ORDER BY id DESC")
-    fun getAllPlaylist() : LiveData<List<Playlist>>
+    @Query("SELECT * FROM playlist_table ORDER BY id_playlist DESC")
+    fun getAllPlaylist(): LiveData<List<Playlist>>
 }
