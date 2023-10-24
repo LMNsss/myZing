@@ -1,60 +1,76 @@
 package com.ngoclm.myzing.ui.playSong
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.ngoclm.myzing.R
+import com.ngoclm.myzing.databinding.FragmentPlaySongBinding
+import com.ngoclm.myzing.ui.adapter.PlaySongTabLayoutAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PlaySongFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PlaySongFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentPlaySongBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_play_song, container, false)
+        binding = FragmentPlaySongBinding.inflate(layoutInflater)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PlaySongFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PlaySongFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.viewPager2.adapter = PlaySongTabLayoutAdapter(requireActivity())
+
+        // Connect the TabLayout and the ViewPager2
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Info"
+                }
+
+                1 -> {
+                    tab.text = "Play"
+                }
+
+                2 -> {
+                    tab.text = "Lyric"
                 }
             }
+        }.attach()
+
+
+        binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                if (position == 0) {
+                    binding.tvInfoFragment.text = getString(R.string.info)
+                    Log.d("ngoc", "onPageSelected: 1")
+                } else {
+                    if (position == 1) {
+                        Log.d("ngoc", "onPageSelected: 2")
+                    } else {
+                        binding.tvInfoFragment.text = getString(R.string.lyric)
+                        Log.d("ngoc", "onPageSelected: 3")
+                    }
+                }
+
+                super.onPageSelected(position)
+            }
+        })
     }
+
+    fun addEvents(){
+        binding.btnDown.setOnClickListener(){
+            val transaction
+        }
+    }
+
+
+
 }

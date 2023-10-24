@@ -1,4 +1,4 @@
-package com.ngoclm.myzing.ui.library.adapter
+package com.ngoclm.myzing.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -31,4 +31,7 @@
     <string name="create_playlist">Tạo playlist</string>
     <string name="suggestion_for_you">Gợi ý cho bạn</string>
     <string name="rely_on_personal_library">Dựa trên lịch sử và thư viện cá nhân</string>
+    <string name="info">Thông tin</string>
+    <string name="lyric">Lời bài hát</string>
+    <string name="may_be_you_want_to_listen">Có thể bạn muốn nghe</string>
 </resources>

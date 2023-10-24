@@ -16,8 +16,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.ngoclm.myzing.base.entities.Song
 import com.ngoclm.myzing.base.interaction.onClickListener
 import com.ngoclm.myzing.databinding.FragmentLibraryBinding
-import com.ngoclm.myzing.ui.library.adapter.PlayListAndAlbumPagerAdapter
-import com.ngoclm.myzing.ui.library.adapter.RecentlyListAdapter
+import com.ngoclm.myzing.ui.adapter.PlayListAndAlbumPagerAdapter
+import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 
 
 class LibraryFragment : Fragment() {

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.add(R.id.layout_play_song, PlaySongFragment())
             transaction.commit()
-            binding.bottomNavigation.visibility = View.INVISIBLE
+//            binding.bottomNavigation.visibility = View.INVISIBLE
         }
     }
 
@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 }
+
+
 
 
 

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ngoclm.myzing.base.entities.Playlist
 import com.ngoclm.myzing.base.interaction.onClickListener
 import com.ngoclm.myzing.databinding.FragmentPlayListBinding
-import com.ngoclm.myzing.ui.library.adapter.PlaylistAdapter
+import com.ngoclm.myzing.ui.adapter.PlaylistAdapter
 
 class PlayListFragment : Fragment() {
     private lateinit var binding: FragmentPlayListBinding
