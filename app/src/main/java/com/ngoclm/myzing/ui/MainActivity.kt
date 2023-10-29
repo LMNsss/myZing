@@ -1,7 +1,6 @@
 package com.ngoclm.myzing.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ngoclm.myzing.R
@@ -13,6 +12,7 @@ import com.ngoclm.myzing.ui.profile.ProfileFragment
 import com.ngoclm.myzing.ui.radio.RadioFragment
 import com.ngoclm.myzing.ui.zingchart.ZingchartFragment
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         events()
-
     }
 
     private fun events() {
@@ -39,10 +38,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.miniPlayerMusic.setOnClickListener() {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.add(R.id.layout_play_song, PlaySongFragment())
-            transaction.commit()
-//            binding.bottomNavigation.visibility = View.INVISIBLE
+//            val transaction = supportFragmentManager.beginTransaction()
+//            transaction.add(R.id.layout_play_song, PlaySongFragment())
+//            transaction.commit()
+
+            val dialogBottomSheet = PlaySongFragment()
+             dialogBottomSheet.show(supportFragmentManager, "bottomsheet")
         }
     }
 
@@ -52,6 +53,9 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.home_container, fragment)
         fragmentTransaction.commit()
     }
+
+
+
 }
 
 
