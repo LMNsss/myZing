@@ -110,6 +110,7 @@ class PlaySongFragment : BottomSheetDialogFragment() {
         }
         bottomSheet.layoutParams = layoutParams
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        behavior.setPeekHeight(0)
     }
 
     private fun getWindowHeight(): Int { // Calculate window height for fullscreen use

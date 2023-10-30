@@ -43,7 +43,12 @@ class MainActivity : AppCompatActivity() {
 //            transaction.commit()
 
             val dialogBottomSheet = PlaySongFragment()
-             dialogBottomSheet.show(supportFragmentManager, "bottomsheet")
+             dialogBottomSheet.show(supportFragmentManager, "bottom-sheet")
+        }
+
+        binding.icPlay.setOnClickListener(){
+            val dialogBottomSheet = PlaySongFragment()
+            dialogBottomSheet.show(supportFragmentManager, "bottom-sheet")
         }
     }
 

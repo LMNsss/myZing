@@ -10,41 +10,44 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ngoclm.myzing.base.entities.Song
 import com.ngoclm.myzing.base.interaction.onClickListener
 import com.ngoclm.myzing.databinding.FragmentLibraryBinding
+import com.ngoclm.myzing.ui.MainActivityViewModel
 import com.ngoclm.myzing.ui.adapter.PlayListAndAlbumPagerAdapter
 import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 
 
 class LibraryFragment : Fragment() {
+    private lateinit var model: MainActivityViewModel
     private lateinit var binding: FragmentLibraryBinding
+
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
-        ).get(LibraryViewModel::class.java)
+        )[LibraryViewModel::class.java]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLibraryBinding.inflate(layoutInflater)
-        return binding.root
 
+        model = activity?.run {
+            ViewModelProvider(this)[MainActivityViewModel::class.java]
+        } ?: throw Exception("Invalid Activity")
+        return binding.root
 
     }
 
 
     private fun initControls() {
-        val adapter = RecentlyListAdapter(object : onClickListener {
-            override fun onClickItem(view: View, pos: Int) {
-                super.onClickItem(view, pos)
-                Toast.makeText(context, "$pos", Toast.LENGTH_SHORT).show()
-            }
+        val adapter = RecentlyListAdapter(object : onClickListener{
+
         })
+        binding.rvListenRecently.setHasFixedSize(true)
         binding.rvListenRecently.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvListenRecently.adapter = adapter
@@ -52,7 +55,9 @@ class LibraryFragment : Fragment() {
             adapter.setSong(it)
         })
     }
+    private val onItemClick: (Song) -> Unit = {
 
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -94,92 +99,90 @@ class LibraryFragment : Fragment() {
 
     private fun addSong() {
         val songAddNew1 = Song(
-            id = 1,
             img = "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/0/0/0037fa44fb1ffa4a5ec148a4c14dccdf_1463244937.jpg",
             "em có yêu anh không",
             "Only c",
             true,
             true,
             "Vpop",
-            true
+            true,
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
 
         )
         myViewModel.insertSong(songAddNew1)
 
         val songAddNew2 = Song(
-            id = 2,
-            img = "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/0/0/0037fa44fb1ffa4a5ec148a4c14dccdf_1463244937.jpg",
+            img = "https://designs.vn/wp-content/images/21-09-2017/lieu-co-phai-chup-anh-duoi-ca-hai-dinh-dang-jpeg-va-raw-la-ban-mot-mui-ten-trung-hai-dich-02.jpg",
             "em có yêu anh không 1",
             "Only c",
             true,
             true,
             "Vpop",
-            true
+            true,
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
 
         )
         myViewModel.insertSong(songAddNew2)
-
+//
         val songAddNew3 = Song(
-            id = 3,
-            img = "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/0/0/0037fa44fb1ffa4a5ec148a4c14dccdf_1463244937.jpg",
+            img = "https://vcdn-dulich.vnecdn.net/2021/12/24/An-Giang-0-jpeg-1470-1640315739.jpg",
             "em có yêu anh không 2",
             "Only c 1",
             true,
             false,
             "Best",
-            true
+            true,
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
 
         )
         myViewModel.insertSong(songAddNew3)
 
         val songAddNew4 = Song(
-            id = 4,
-            img = "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/0/0/0037fa44fb1ffa4a5ec148a4c14dccdf_1463244937.jpg",
+            img = "https://cdn.vjshop.vn/tin-tuc/phan-biet-raw-va-jpeg/phan-biet-raw-va-jpeg-12.jpg",
             "em có yêu anh không 3",
             "Only c",
             true,
             true,
             "Best",
-            true
+            true,
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
 
         )
         myViewModel.insertSong(songAddNew4)
 
         val songAddNew5 = Song(
-            id = 5,
-            img = "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/0/0/0037fa44fb1ffa4a5ec148a4c14dccdf_1463244937.jpg",
+            img = "https://vnreview.vn/image/16/81/51/1681516.jpg",
             "em có yêu anh không 4",
             "Only c",
             true,
             false,
             "Vpop",
-            true
-
+            true,
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
         )
         myViewModel.insertSong(songAddNew5)
 
         val songAddNew6 = Song(
-            id = 6,
             img = "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/0/0/0037fa44fb1ffa4a5ec148a4c14dccdf_1463244937.jpg",
             "em có yêu anh không 5",
             "Only c",
             true,
             false,
             "Vpop",
-            true
+            true,
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
 
         )
         myViewModel.insertSong(songAddNew6)
         val songAddNew7 = Song(
-            id = 7,
             img = "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/0/0/0037fa44fb1ffa4a5ec148a4c14dccdf_1463244937.jpg",
             "em có yêu anh không 6",
             "Only c",
             true,
             true,
             "Vpop",
-            true
-
+            true,
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
         )
         myViewModel.insertSong(songAddNew7)
     }

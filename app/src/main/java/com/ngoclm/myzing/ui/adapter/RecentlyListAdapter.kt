@@ -1,19 +1,32 @@
 package com.ngoclm.myzing.ui.adapter
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ngoclm.myzing.base.entities.Song
-import com.ngoclm.myzing.databinding.RecentlyListItemBinding
 import com.ngoclm.myzing.base.interaction.onClickListener
+import com.ngoclm.myzing.databinding.RecentlyListItemBinding
 
-class RecentlyListAdapter( private var buttonClickListener: onClickListener
+class RecentlyListAdapter(
+    private var onClickListener: onClickListener
 ) : RecyclerView.Adapter<RecentlyListAdapter.ListSongViewHolder>() {
-    private var ds:List<Song> = listOf()
+    private var ds: List<Song> = listOf()
+
     inner class ListSongViewHolder(var binding: RecentlyListItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(song: Song) {
+            itemView.setOnClickListener { onClickListener.onClickItem(song) }
+            binding.apply {
+                Glide.with(itemView.context)
+                    .load(song.img)
+                    .into(imgRecentlySong)
+                tvListenRecentlySong.text = song.songName
+
+            }
+        }
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSongViewHolder {
@@ -28,17 +41,11 @@ class RecentlyListAdapter( private var buttonClickListener: onClickListener
 
     override fun onBindViewHolder(holder: ListSongViewHolder, position: Int) {
 
-        holder.binding.apply {
-            Glide.with(holder.itemView.context)
-                .load(ds[position].img)
-                .into(imgRecentlySong)
-            tvListenRecentlySong.text = ds[position].songName
-            holder.itemView.setOnClickListener() {
-                buttonClickListener.onClickItem(it, position)
-            }
-        }
+        holder.bind(ds[position])
     }
-    fun setSong(ds: List<Song>){
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setSong(ds: List<Song>) {
         this.ds = ds
         notifyDataSetChanged()
     }

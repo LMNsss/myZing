@@ -18,6 +18,7 @@
             android:id="@+id/img_recently_song"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             android:src="@drawable/img_song_background"/>
     </com.google.android.material.card.MaterialCardView>
 

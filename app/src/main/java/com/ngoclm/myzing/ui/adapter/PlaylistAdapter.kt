@@ -36,9 +36,7 @@ class PlaylistAdapter(
                 .into(imgPlayList)
             tvPlayListName.text = ds[position].playlistName
             infoSource.text = ds[position].infoSource
-            holder.itemView.setOnClickListener() {
-                buttonClickListener.onClickItem(it, position)
-            }
+
         }
     }
 

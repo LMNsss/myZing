@@ -38,10 +38,7 @@ class PlayListFragment : Fragment() {
 
     private fun initControls() {
         val adapter = PlaylistAdapter(object : onClickListener {
-            override fun onClickItem(view: View, pos: Int) {
-                super.onClickItem(view, pos)
-                Toast.makeText(context, "$pos", Toast.LENGTH_SHORT).show()
-            }
+
         })
         binding.rvPlayList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
