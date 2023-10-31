@@ -21,7 +21,7 @@ import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 
 
 class LibraryFragment : Fragment() {
-    private lateinit var model: MainActivityViewModel
+    private lateinit var sharemodel: MainActivityViewModel
     private lateinit var binding: FragmentLibraryBinding
 
     private val myViewModel: LibraryViewModel by lazy {
@@ -32,10 +32,10 @@ class LibraryFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLibraryBinding.inflate(layoutInflater)
 
-        model = activity?.run {
+        sharemodel = activity?.run {
             ViewModelProvider(this)[MainActivityViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
         return binding.root
@@ -44,8 +44,11 @@ class LibraryFragment : Fragment() {
 
 
     private fun initControls() {
-        val adapter = RecentlyListAdapter(object : onClickListener{
-
+        val adapter = RecentlyListAdapter(object : onClickListener {
+            override fun onClickItem(song: Song) {
+                super.onClickItem(song)
+                Toast.makeText(context, "${song.id}", Toast.LENGTH_SHORT).show()
+            }
         })
         binding.rvListenRecently.setHasFixedSize(true)
         binding.rvListenRecently.layoutManager =
@@ -55,9 +58,7 @@ class LibraryFragment : Fragment() {
             adapter.setSong(it)
         })
     }
-    private val onItemClick: (Song) -> Unit = {
 
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

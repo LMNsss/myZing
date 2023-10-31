@@ -262,6 +262,7 @@
                     android:layout_marginTop="@dimen/dimen_10dp"
                     android:id="@+id/tv_maybe_you_want_to_Listen"
                     android:text="@string/may_be_you_want_to_listen"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="@dimen/tv_16"
                     />

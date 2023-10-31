@@ -23,12 +23,9 @@ class RecentlyListAdapter(
                     .load(song.img)
                     .into(imgRecentlySong)
                 tvListenRecentlySong.text = song.songName
-
             }
         }
     }
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSongViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = RecentlyListItemBinding.inflate(inflater, parent, false)
@@ -40,7 +37,6 @@ class RecentlyListAdapter(
     }
 
     override fun onBindViewHolder(holder: ListSongViewHolder, position: Int) {
-
         holder.bind(ds[position])
     }
 

@@ -38,10 +38,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.miniPlayerMusic.setOnClickListener() {
-//            val transaction = supportFragmentManager.beginTransaction()
-//            transaction.add(R.id.layout_play_song, PlaySongFragment())
-//            transaction.commit()
-
             val dialogBottomSheet = PlaySongFragment()
              dialogBottomSheet.show(supportFragmentManager, "bottom-sheet")
         }
