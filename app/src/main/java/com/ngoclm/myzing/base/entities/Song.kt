@@ -10,12 +10,14 @@ data class Song(
     @ColumnInfo(name = "song_name") val songName: String,
     @ColumnInfo(name = "singer_name") val singerName: String,
     @ColumnInfo(name = "love") val love: Boolean = false,
-    @ColumnInfo(name = "recently") val recently: Boolean = false,
+    @ColumnInfo(name = "recently") var recently: Boolean = false,
     @ColumnInfo(name = "play_list") val playList: String,
-    @ColumnInfo(name = "downloaded") val downloaded: Boolean = false,
-    @ColumnInfo(name = "file_path") val filePath: String
+    @ColumnInfo(name = "downloaded") var downloaded: Boolean = false,
+    @ColumnInfo(name = "file_path") val filePath: String,
+    @ColumnInfo(name = "love_number") var loveNumber: Int,
+    @ColumnInfo(name = "listens_number") var listensNumber: Int,
 
-) {
+    ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }

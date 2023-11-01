@@ -7,6 +7,6 @@ import com.ngoclm.myzing.base.entities.Song
 class MainActivityViewModel: ViewModel() {
     val selected = MutableLiveData<Song>()
     fun select(song: Song) {
-        selected.value = song
+        selected.postValue(song)
     }
 }

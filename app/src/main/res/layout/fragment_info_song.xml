@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -34,13 +34,12 @@
             app:layout_constraintGuide_percent="0.95" />
 
 
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
             android:layout_marginBottom="@dimen/dimen_20dp"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/dimen_10dp"
             app:layout_constraintBottom_toTopOf="@id/layout_time_line"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_95"
             app:layout_constraintStart_toStartOf="@id/guideline_vertical_5"
@@ -68,7 +67,7 @@
                         app:layout_constraintGuide_percent="0.25" />
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/img_song"
+                        android:id="@+id/cv_img_song"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         app:cardCornerRadius="8dp"
@@ -77,6 +76,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_song"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:src="@drawable/img_song_background" />
@@ -141,8 +141,7 @@
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_user_music_1"
-                                />
+                                android:src="@drawable/ic_user_music_1" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tv_listen_number"
@@ -218,7 +217,7 @@
                         app:layout_constraintTop_toBottomOf="@id/v_line">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_detail_singer"
+                            android:id="@+id/tv_detail_artist"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -237,7 +236,7 @@
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_detail_singer" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_detail_artist" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_detail_source"
@@ -257,15 +256,15 @@
 
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_maybe_you_want_to_Listen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10dp"
-                    android:id="@+id/tv_maybe_you_want_to_Listen"
                     android:text="@string/may_be_you_want_to_listen"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
                     android:textSize="@dimen/tv_16"
-                    />
+                    android:textStyle="bold" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_list_music"
                     android:layout_width="match_parent"

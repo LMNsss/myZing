@@ -16,6 +16,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+        <FrameLayout
+            android:id="@+id/layout_play_song"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:translationZ="@dimen/dimen_10dp" />
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/img_song"
+            android:id="@+id/cv_img_song"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
@@ -39,8 +44,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@id/img_song"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
                 android:src="@drawable/img_song_background" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -51,18 +58,18 @@
             android:layout_marginStart="10dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img_song"
+            app:layout_constraintStart_toEndOf="@id/cv_img_song"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_singer_name"
+                android:id="@+id/tv_song_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Em Có Yêu Anh Không"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_song_name"
+                android:id="@+id/tv_singer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Only C"
@@ -124,15 +131,5 @@
             android:background="#DDDDDD" />
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-    <FrameLayout
-        android:id="@+id/layout_play_song"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:translationZ="@dimen/dimen_10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

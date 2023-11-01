@@ -20,7 +20,7 @@ class SongRepository (app: Application) {
 
     fun getAllSong(): LiveData<List<Song>> = songDao.getAllSong()
 
-    fun getSongById(id: Int): LiveData<List<Song>> {
-        return songDao.getItemById(id)
+    fun getSongByRecently(recently: Boolean): LiveData<List<Song>> {
+        return songDao.getItemById(recently)
     }
 }

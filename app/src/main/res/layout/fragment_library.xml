@@ -403,6 +403,7 @@
                 android:id="@+id/ic_menu_playlist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tint="@color/black"
                 android:src="@drawable/ic_menu_dots_vertical"
                 app:layout_constraintBottom_toBottomOf="@id/tab_layout"
                 app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.97"

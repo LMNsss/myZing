@@ -21,9 +21,9 @@ import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 
 
 class LibraryFragment : Fragment() {
-    private lateinit var sharemodel: MainActivityViewModel
+    private lateinit var shareViewModel: MainActivityViewModel
     private lateinit var binding: FragmentLibraryBinding
-
+    private lateinit var songRecently: Song
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
@@ -34,20 +34,32 @@ class LibraryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentLibraryBinding.inflate(layoutInflater)
-
-        sharemodel = activity?.run {
+        shareViewModel = activity?.run {
             ViewModelProvider(this)[MainActivityViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
         return binding.root
-
     }
 
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        addSong()
+        tablayout()
+        viewpagerCallBack()
+        initControls()
+
+    }
 
     private fun initControls() {
         val adapter = RecentlyListAdapter(object : onClickListener {
             override fun onClickItem(song: Song) {
                 super.onClickItem(song)
                 Toast.makeText(context, "${song.id}", Toast.LENGTH_SHORT).show()
+                shareViewModel.select(song)
+//                if (song.id == ) {
+//                    song.listensNumber += 1
+//                }
             }
         })
         binding.rvListenRecently.setHasFixedSize(true)
@@ -59,10 +71,23 @@ class LibraryFragment : Fragment() {
         })
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun viewpagerCallBack() {
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                if (position == 0) {
+                    binding.icMenuPlaylist.visibility = View.VISIBLE
+                    Log.d("hieu", "onPageSelected: 1")
+                } else if (position == 1) {
+                    binding.icMenuPlaylist.visibility = View.INVISIBLE
+                    Log.d("hieu", "onPageSelected: 2")
+                }
 
-        // Set up the ViewPager2 with the adapter
+                super.onPageSelected(position)
+            }
+        })
+    }
+
+    private fun tablayout() {
         binding.viewPager.adapter = PlayListAndAlbumPagerAdapter(requireActivity())
 
         // Connect the TabLayout and the ViewPager2
@@ -77,26 +102,8 @@ class LibraryFragment : Fragment() {
                 }
             }
         }.attach()
-
-
-        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                if (position == 0) {
-                    binding.icMenuPlaylist.visibility = View.VISIBLE
-                    Log.d("hieu", "onPageSelected: 1")
-                } else if (position == 1) {
-                    binding.icMenuPlaylist.visibility = View.INVISIBLE
-                    Log.d("hieu", "onPageSelected: 2")
-                }
-
-                super.onPageSelected(position)
-            }
-        })
-
-        addSong()
-        initControls()
-
     }
+
 
     private fun addSong() {
         val songAddNew1 = Song(
@@ -107,8 +114,9 @@ class LibraryFragment : Fragment() {
             true,
             "Vpop",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
-
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            200,
+            0
         )
         myViewModel.insertSong(songAddNew1)
 
@@ -120,7 +128,9 @@ class LibraryFragment : Fragment() {
             true,
             "Vpop",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            200,
+            0
 
         )
         myViewModel.insertSong(songAddNew2)
@@ -133,7 +143,9 @@ class LibraryFragment : Fragment() {
             false,
             "Best",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            200,
+            0
 
         )
         myViewModel.insertSong(songAddNew3)
@@ -146,7 +158,9 @@ class LibraryFragment : Fragment() {
             true,
             "Best",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            200,
+            0
 
         )
         myViewModel.insertSong(songAddNew4)
@@ -159,7 +173,9 @@ class LibraryFragment : Fragment() {
             false,
             "Vpop",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            200,
+            0
         )
         myViewModel.insertSong(songAddNew5)
 
@@ -171,7 +187,9 @@ class LibraryFragment : Fragment() {
             false,
             "Vpop",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            200,
+            0
 
         )
         myViewModel.insertSong(songAddNew6)
@@ -183,7 +201,9 @@ class LibraryFragment : Fragment() {
             true,
             "Vpop",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\""
+            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            200,
+            0
         )
         myViewModel.insertSong(songAddNew7)
     }

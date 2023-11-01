@@ -14,7 +14,7 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/img_song"
+            android:id="@+id/cv_img_song"
             android:layout_width="350dp"
             android:layout_height="350dp"
             app:cardCornerRadius="170dp"
@@ -24,7 +24,9 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_song"
                 android:layout_width="350dp"
+                android:scaleType="centerCrop"
                 android:layout_height="350dp"
                 android:src="@drawable/img_song_background" />
 
@@ -37,7 +39,7 @@
             app:layout_constraintBottom_toTopOf="@id/layout_time_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_song">
+            app:layout_constraintTop_toBottomOf="@id/cv_img_song">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_song_name"
