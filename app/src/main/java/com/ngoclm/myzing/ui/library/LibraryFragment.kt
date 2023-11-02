@@ -23,7 +23,7 @@ import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 class LibraryFragment : Fragment() {
     private lateinit var shareViewModel: MainActivityViewModel
     private lateinit var binding: FragmentLibraryBinding
-    private lateinit var lastSong: Song
+//    private lateinit var lastSong: Song
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
@@ -43,18 +43,18 @@ class LibraryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        addSong()
-        getLastSong()
+        addSong()
+//        getLastSong()
         tablayout()
         viewpagerCallBack()
         listRecentlySong()
     }
-    private fun getLastSong(){
-        myViewModel.getLastSong(true).observe(viewLifecycleOwner, Observer{
-            lastSong = it
-        })
-        shareViewModel.getLastSong(lastSong)
-    }
+//    private fun getLastSong(){
+//        myViewModel.getLastSong(true).observe(viewLifecycleOwner, Observer{
+//            lastSong = it
+//        })
+//        shareViewModel.getLastSong(lastSong)
+//    }
     private fun listRecentlySong() {
         val adapter = RecentlyListAdapter(object : onClickListener {
             override fun onClickItem(song: Song) {
