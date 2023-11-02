@@ -23,7 +23,7 @@ import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 class LibraryFragment : Fragment() {
     private lateinit var shareViewModel: MainActivityViewModel
     private lateinit var binding: FragmentLibraryBinding
-    private lateinit var songRecently: Song
+    private lateinit var lastSong: Song
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
@@ -41,17 +41,21 @@ class LibraryFragment : Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        addSong()
+        getLastSong()
         tablayout()
         viewpagerCallBack()
-        initControls()
-
+        listRecentlySong()
     }
-
-    private fun initControls() {
+    private fun getLastSong(){
+        myViewModel.getLastSong(true).observe(viewLifecycleOwner, Observer{
+            lastSong = it
+        })
+        shareViewModel.getLastSong(lastSong)
+    }
+    private fun listRecentlySong() {
         val adapter = RecentlyListAdapter(object : onClickListener {
             override fun onClickItem(song: Song) {
                 super.onClickItem(song)
@@ -66,7 +70,7 @@ class LibraryFragment : Fragment() {
         binding.rvListenRecently.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvListenRecently.adapter = adapter
-        myViewModel.getAllSong().observe(viewLifecycleOwner, Observer {
+        myViewModel.getSongByRecently(true).observe(viewLifecycleOwner, Observer {
             adapter.setSong(it)
         })
     }
@@ -81,7 +85,6 @@ class LibraryFragment : Fragment() {
                     binding.icMenuPlaylist.visibility = View.INVISIBLE
                     Log.d("hieu", "onPageSelected: 2")
                 }
-
                 super.onPageSelected(position)
             }
         })
@@ -105,6 +108,8 @@ class LibraryFragment : Fragment() {
     }
 
 
+
+
     private fun addSong() {
         val songAddNew1 = Song(
             img = "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/0/0/0037fa44fb1ffa4a5ec148a4c14dccdf_1463244937.jpg",
@@ -116,7 +121,8 @@ class LibraryFragment : Fragment() {
             true,
             "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
             200,
-            0
+            0,
+            false
         )
         myViewModel.insertSong(songAddNew1)
 
@@ -130,7 +136,8 @@ class LibraryFragment : Fragment() {
             true,
             "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
             200,
-            0
+            0,
+            true
 
         )
         myViewModel.insertSong(songAddNew2)
@@ -145,7 +152,8 @@ class LibraryFragment : Fragment() {
             true,
             "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
             200,
-            0
+            0,
+            false
 
         )
         myViewModel.insertSong(songAddNew3)
@@ -160,7 +168,8 @@ class LibraryFragment : Fragment() {
             true,
             "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
             200,
-            0
+            0,
+            false
 
         )
         myViewModel.insertSong(songAddNew4)
@@ -175,7 +184,8 @@ class LibraryFragment : Fragment() {
             true,
             "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
             200,
-            0
+            0,
+            false
         )
         myViewModel.insertSong(songAddNew5)
 
@@ -189,7 +199,8 @@ class LibraryFragment : Fragment() {
             true,
             "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
             200,
-            0
+            0,
+            false
 
         )
         myViewModel.insertSong(songAddNew6)
@@ -203,7 +214,8 @@ class LibraryFragment : Fragment() {
             true,
             "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
             200,
-            0
+            0,
+            false
         )
         myViewModel.insertSong(songAddNew7)
     }

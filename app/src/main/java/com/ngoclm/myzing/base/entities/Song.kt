@@ -16,7 +16,7 @@ data class Song(
     @ColumnInfo(name = "file_path") val filePath: String,
     @ColumnInfo(name = "love_number") var loveNumber: Int,
     @ColumnInfo(name = "listens_number") var listensNumber: Int,
-
+    @ColumnInfo(name = "song_last") var last: Boolean = false
     ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
