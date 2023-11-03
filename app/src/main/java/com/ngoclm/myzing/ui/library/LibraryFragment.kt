@@ -21,52 +21,56 @@ import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 
 
 class LibraryFragment : Fragment() {
-    private lateinit var shareViewModel: MainActivityViewModel
     private lateinit var binding: FragmentLibraryBinding
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
         )[LibraryViewModel::class.java]
     }
+    private val shareViewModel: MainActivityViewModel by lazy {
+        ViewModelProvider(
+            this, MainActivityViewModel.ShareViewModelFactory(requireActivity().application)
+        )[MainActivityViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentLibraryBinding.inflate(layoutInflater)
-        shareViewModel = activity?.run {
-            ViewModelProvider(this)[MainActivityViewModel::class.java]
-        } ?: throw Exception("Invalid Activity")
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        addSong()
-        setLastSong()
+        addSong()
         tablayout()
         viewpagerCallBack()
         initControls()
-
     }
-    private fun events(){
 
-    }
-    private fun setLastSong(){
-        myViewModel.getLastSong(true).observe(viewLifecycleOwner, Observer {
-            shareViewModel.getLastSong(it)
-        })
+    private fun events() {
+
     }
 
     private fun initControls() {
         val adapter = RecentlyListAdapter(object : onClickListener {
             override fun onClickItem(song: Song) {
                 super.onClickItem(song)
-                Toast.makeText(context, "${song.id}", Toast.LENGTH_SHORT).show()
-                shareViewModel.select(song)
+                var lastSong: Song? = null
+                shareViewModel.getLastSong(true).observe(viewLifecycleOwner, Observer {
+                    lastSong = it
+                    if (lastSong != null && lastSong!!.id != song.id){
+                        Toast.makeText(context, lastSong!!.songName, Toast.LENGTH_SHORT).show()
+                    }
+                })
+
                 if (song.recently == false) {
                     song.recently = true
                 }
+                song.last = true
+                myViewModel.updateSong(song)
+                Toast.makeText(context, "Đang phát ${song.songName}", Toast.LENGTH_SHORT).show()
                 song.listensNumber += 1
             }
         })
@@ -141,7 +145,7 @@ class LibraryFragment : Fragment() {
             "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
             200,
             0,
-            true
+            false
 
         )
         myViewModel.insertSong(songAddNew2)

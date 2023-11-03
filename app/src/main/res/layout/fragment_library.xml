@@ -11,7 +11,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/main_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="50dp">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_vertical_0.03"

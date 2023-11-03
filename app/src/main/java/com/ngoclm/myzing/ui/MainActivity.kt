@@ -3,12 +3,14 @@ package com.ngoclm.myzing.ui
 import android.app.Activity
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.ngoclm.myzing.R
+import com.ngoclm.myzing.base.entities.Song
 import com.ngoclm.myzing.databinding.ActivityMainBinding
 import com.ngoclm.myzing.ui.discovery.DiscoveryFragment
 import com.ngoclm.myzing.ui.library.LibraryFragment
@@ -20,18 +22,35 @@ import com.ngoclm.myzing.ui.zingchart.ZingchartFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var shareViewModel: MainActivityViewModel
+    private val shareViewModel: MainActivityViewModel by lazy {
+        ViewModelProvider(
+            this, MainActivityViewModel.ShareViewModelFactory(this.application)
+        )[MainActivityViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        shareViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+        initControls()
         events()
     }
-    private fun initControls(){
 
+    private fun initControls() {
+        shareViewModel.getLastSong(true).observe(this, Observer {
+            val lastSong = it
+            if (lastSong == null) {
+                binding.miniPlayerMusic.visibility = View.INVISIBLE
+            } else {
+                binding.miniPlayerMusic.visibility = View.VISIBLE
+                binding.tvSongName.text = it.songName
+                Glide.with(this).load(it.img).into(binding.imgSong)
+                binding.tvSingerName.text = it.singerName
+            }
+        })
     }
+
     private fun events() {
         binding.bottomNavigation.selectedItemId = R.id.btn_discovery
         binding.bottomNavigation.setOnItemSelectedListener {
@@ -46,7 +65,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
         binding.miniPlayerMusic.setOnClickListener() {
             val dialogBottomSheet = PlaySongFragment()
             dialogBottomSheet.show(supportFragmentManager, "bottom-sheet")
@@ -55,12 +73,6 @@ class MainActivity : AppCompatActivity() {
         binding.icPlay.setOnClickListener() {
 
         }
-
-        shareViewModel.songPlayLast.observe(this, Observer {
-            binding.tvSongName.text = it.songName
-            Glide.with(this).load(it.img).into(binding.imgSong)
-            binding.tvSingerName.text = it.singerName
-        })
     }
 
     private fun replaceFragment(fragment: Fragment) {

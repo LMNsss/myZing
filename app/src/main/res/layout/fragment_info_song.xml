@@ -78,6 +78,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/img_song"
                             android:layout_width="70dp"
+                            android:scaleType="centerCrop"
                             android:layout_height="70dp"
                             android:src="@drawable/img_song_background" />
                     </com.google.android.material.card.MaterialCardView>
