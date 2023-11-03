@@ -29,7 +29,9 @@ class MainActivity : AppCompatActivity() {
         shareViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         events()
     }
+    private fun initControls(){
 
+    }
     private fun events() {
         binding.bottomNavigation.selectedItemId = R.id.btn_discovery
         binding.bottomNavigation.setOnItemSelectedListener {
@@ -51,11 +53,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.icPlay.setOnClickListener() {
-            val dialogBottomSheet = PlaySongFragment()
-            dialogBottomSheet.show(supportFragmentManager, "bottom-sheet")
+
         }
 
-        shareViewModel.selected.observe(this, Observer {
+        shareViewModel.songPlayLast.observe(this, Observer {
             binding.tvSongName.text = it.songName
             Glide.with(this).load(it.img).into(binding.imgSong)
             binding.tvSingerName.text = it.singerName

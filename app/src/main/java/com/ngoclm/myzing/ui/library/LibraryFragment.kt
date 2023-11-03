@@ -23,7 +23,6 @@ import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 class LibraryFragment : Fragment() {
     private lateinit var shareViewModel: MainActivityViewModel
     private lateinit var binding: FragmentLibraryBinding
-//    private lateinit var lastSong: Song
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
@@ -43,27 +42,32 @@ class LibraryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addSong()
-//        getLastSong()
+//        addSong()
+        setLastSong()
         tablayout()
         viewpagerCallBack()
-        listRecentlySong()
+        initControls()
+
     }
-//    private fun getLastSong(){
-//        myViewModel.getLastSong(true).observe(viewLifecycleOwner, Observer{
-//            lastSong = it
-//        })
-//        shareViewModel.getLastSong(lastSong)
-//    }
-    private fun listRecentlySong() {
+    private fun events(){
+
+    }
+    private fun setLastSong(){
+        myViewModel.getLastSong(true).observe(viewLifecycleOwner, Observer {
+            shareViewModel.getLastSong(it)
+        })
+    }
+
+    private fun initControls() {
         val adapter = RecentlyListAdapter(object : onClickListener {
             override fun onClickItem(song: Song) {
                 super.onClickItem(song)
                 Toast.makeText(context, "${song.id}", Toast.LENGTH_SHORT).show()
                 shareViewModel.select(song)
-//                if (song.id == ) {
-//                    song.listensNumber += 1
-//                }
+                if (song.recently == false) {
+                    song.recently = true
+                }
+                song.listensNumber += 1
             }
         })
         binding.rvListenRecently.setHasFixedSize(true)
@@ -73,6 +77,7 @@ class LibraryFragment : Fragment() {
         myViewModel.getSongByRecently(true).observe(viewLifecycleOwner, Observer {
             adapter.setSong(it)
         })
+
     }
 
     private fun viewpagerCallBack() {
@@ -85,6 +90,7 @@ class LibraryFragment : Fragment() {
                     binding.icMenuPlaylist.visibility = View.INVISIBLE
                     Log.d("hieu", "onPageSelected: 2")
                 }
+
                 super.onPageSelected(position)
             }
         })
@@ -106,8 +112,6 @@ class LibraryFragment : Fragment() {
             }
         }.attach()
     }
-
-
 
 
     private fun addSong() {

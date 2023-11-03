@@ -13,7 +13,6 @@ class SongRepository (app: Application) {
         val songDataBase: SongDatabase = SongDatabase.getInstance(app)
         songDao = songDataBase.getSongDao()
     }
-
     suspend fun insertSong(song: Song) = songDao.insertSong(song)
     suspend fun updateSong(song: Song) = songDao.updateSong(song)
     suspend fun deleteSong(song: Song) = songDao.deleteSong(song)

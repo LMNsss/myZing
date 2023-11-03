@@ -27,7 +27,7 @@ class LibraryViewModel(application: Application) : ViewModel() {
     fun getAllSong(): LiveData<List<Song>> = repository.getAllSong()
 
     fun getSongByRecently(recently: Boolean) = repository.getSongByRecently(recently)
-    fun getLastSong(lastSong: Boolean) = repository.getLastSong(lastSong)
+    fun getLastSong(last: Boolean ) = repository.getLastSong(last)
 
 
     @Suppress("UNCHECKED_CAST")
