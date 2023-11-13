@@ -2,6 +2,7 @@ package com.ngoclm.myzing.ui
 
 import android.app.Activity
 import android.graphics.BitmapFactory
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +23,7 @@ import com.ngoclm.myzing.ui.zingchart.ZingchartFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    private var mediaPlayer: MediaPlayer? = null
     private val shareViewModel: MainActivityViewModel by lazy {
         ViewModelProvider(
             this, MainActivityViewModel.ShareViewModelFactory(this.application)
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initControls()
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initControls() {
         shareViewModel.getLastSong().observe(this, Observer {
-            if (it == null){
+            if (it == null) {
                 binding.miniPlayerMusic.visibility = View.INVISIBLE
             } else {
                 binding.miniPlayerMusic.visibility = View.VISIBLE

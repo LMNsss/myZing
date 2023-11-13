@@ -22,7 +22,8 @@ import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 
 class LibraryFragment : Fragment() {
     private lateinit var binding: FragmentLibraryBinding
-    private lateinit var lastSong: Song
+
+    //    private lateinit var lastSong: Song
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
@@ -55,6 +56,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun initControls() {
+        var lastSong: Song? = null
         shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
             lastSong = it
         })
@@ -64,14 +66,16 @@ class LibraryFragment : Fragment() {
                 if (!song.recently) {
                     song.recently = true
                 }
-                if (song.id != lastSong.id) {
+                if (lastSong != null && song.id != lastSong!!.id) {
                     song.last = true
-                    lastSong.last = false
+                    lastSong!!.last = false
+                    myViewModel.updateSong(lastSong!!)
+                } else {
+                    song.last = true
                 }
-                myViewModel.updateSong(lastSong)
+                song.listensNumber += 1
                 myViewModel.updateSong(song)
                 Toast.makeText(context, "Đang phát ${song.songName}", Toast.LENGTH_SHORT).show()
-                song.listensNumber += 1
             }
         })
         binding.rvListenRecently.setHasFixedSize(true)
@@ -116,7 +120,6 @@ class LibraryFragment : Fragment() {
             }
         }.attach()
     }
-
 
     private fun addSong() {
         val songAddNew1 = Song(
