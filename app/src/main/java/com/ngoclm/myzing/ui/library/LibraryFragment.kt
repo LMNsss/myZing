@@ -22,6 +22,7 @@ import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 
 class LibraryFragment : Fragment() {
     private lateinit var binding: FragmentLibraryBinding
+    private lateinit var lastSong: Song
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
@@ -43,7 +44,7 @@ class LibraryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addSong()
+//        addSong()
         tablayout()
         viewpagerCallBack()
         initControls()
@@ -54,21 +55,20 @@ class LibraryFragment : Fragment() {
     }
 
     private fun initControls() {
+        shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
+            lastSong = it
+        })
         val adapter = RecentlyListAdapter(object : onClickListener {
             override fun onClickItem(song: Song) {
                 super.onClickItem(song)
-                var lastSong: Song? = null
-                shareViewModel.getLastSong(true).observe(viewLifecycleOwner, Observer {
-                    lastSong = it
-                    if (lastSong != null && lastSong!!.id != song.id){
-                        Toast.makeText(context, lastSong!!.songName, Toast.LENGTH_SHORT).show()
-                    }
-                })
-
-                if (song.recently == false) {
+                if (!song.recently) {
                     song.recently = true
                 }
-                song.last = true
+                if (song.id != lastSong.id) {
+                    song.last = true
+                    lastSong.last = false
+                }
+                myViewModel.updateSong(lastSong)
                 myViewModel.updateSong(song)
                 Toast.makeText(context, "Đang phát ${song.songName}", Toast.LENGTH_SHORT).show()
                 song.listensNumber += 1

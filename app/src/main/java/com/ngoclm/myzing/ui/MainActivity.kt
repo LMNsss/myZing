@@ -22,6 +22,7 @@ import com.ngoclm.myzing.ui.zingchart.ZingchartFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     private val shareViewModel: MainActivityViewModel by lazy {
         ViewModelProvider(
             this, MainActivityViewModel.ShareViewModelFactory(this.application)
@@ -38,9 +39,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initControls() {
-        shareViewModel.getLastSong(true).observe(this, Observer {
-            val lastSong = it
-            if (lastSong == null) {
+        shareViewModel.getLastSong().observe(this, Observer {
+            if (it == null){
                 binding.miniPlayerMusic.visibility = View.INVISIBLE
             } else {
                 binding.miniPlayerMusic.visibility = View.VISIBLE
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 
     private fun events() {
         binding.bottomNavigation.selectedItemId = R.id.btn_discovery

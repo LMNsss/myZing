@@ -30,7 +30,7 @@ class InfoSongFragment : Fragment() {
     }
 
     private fun addEvent(){
-        shareViewModel.selected.observe(viewLifecycleOwner, Observer {
+        shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
             Glide.with(this).load(it.img).into(binding.imgSong)
             binding.tvSongName.text = it.songName
             binding.tvSingerName.text = it.singerName

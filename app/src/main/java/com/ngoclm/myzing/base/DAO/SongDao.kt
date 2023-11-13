@@ -24,6 +24,7 @@ interface SongDao {
     @Query("SELECT * FROM song_table ORDER BY id")
     fun getAllSong() : LiveData<List<Song>>
 
+
     @Query("SELECT * FROM song_table WHERE recently = :recently")
     fun getItemByRecently(recently: Boolean):LiveData<List<Song>>
 

@@ -26,6 +26,7 @@ class LibraryViewModel(application: Application) : ViewModel() {
 
     fun getAllSong(): LiveData<List<Song>> = repository.getAllSong()
 
+//    fun getSongByRecently(recently: Boolean) = viewModelScope.launch { repository.getSongByRecently(recently) }
     fun getSongByRecently(recently: Boolean) = repository.getSongByRecently(recently)
 
 
