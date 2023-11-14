@@ -4,7 +4,9 @@ import android.app.Activity
 import android.graphics.BitmapFactory
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,11 +21,12 @@ import com.ngoclm.myzing.ui.playSong.PlaySongFragment
 import com.ngoclm.myzing.ui.profile.ProfileFragment
 import com.ngoclm.myzing.ui.radio.RadioFragment
 import com.ngoclm.myzing.ui.zingchart.ZingchartFragment
+import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var mediaPlayer: MediaPlayer? = null
+    private lateinit var mediaPlayer: MediaPlayer
     private val shareViewModel: MainActivityViewModel by lazy {
         ViewModelProvider(
             this, MainActivityViewModel.ShareViewModelFactory(this.application)
@@ -33,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        mediaPlayer = MediaPlayer()
         setContentView(binding.root)
         initControls()
         events()
@@ -47,10 +51,41 @@ class MainActivity : AppCompatActivity() {
                 binding.tvSongName.text = it.songName
                 Glide.with(this).load(it.img).into(binding.imgSong)
                 binding.tvSingerName.text = it.singerName
+
+                val filePath= it.filePath
+                Log.d("ngoc", "file: $filePath")
+                binding.icLove.setOnClickListener() {
+
+                }
+                binding.icPlay.setOnClickListener() {
+//                    playMusic(filePath)
+//                    if (mediaPlayer?.isPlaying == true) {
+//                        pauseMusic()
+//                        it.setBackgroundResource(R.drawable.ic_pause)
+//                    } else {
+//                        playMusic(filePath)
+//                        it.setBackgroundResource(R.drawable.ic_play_pause)
+//                    }
+
+                }
             }
+
         })
     }
 
+    private fun playMusic(url: String) {
+
+            mediaPlayer.setDataSource(url)
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+
+    }
+
+    private fun pauseMusic() {
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+        }
+    }
 
     private fun events() {
         binding.bottomNavigation.selectedItemId = R.id.btn_discovery
@@ -71,7 +106,11 @@ class MainActivity : AppCompatActivity() {
             dialogBottomSheet.show(supportFragmentManager, "bottom-sheet")
         }
 
-        binding.icPlay.setOnClickListener() {
+
+        binding.icNextSong.setOnClickListener() {
+
+        }
+        binding.icLove.setOnClickListener() {
 
         }
     }

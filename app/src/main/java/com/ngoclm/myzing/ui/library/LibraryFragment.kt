@@ -130,7 +130,7 @@ class LibraryFragment : Fragment() {
             true,
             "Vpop",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            "https://drive.google.com/file/d/1-owaGvQfUocVycBBjEjUrS9rOSgkViBc/view?usp=sharing",
             200,
             0,
             false
@@ -145,7 +145,7 @@ class LibraryFragment : Fragment() {
             true,
             "Vpop",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            "https://drive.google.com/file/d/1-owaGvQfUocVycBBjEjUrS9rOSgkViBc/view?usp=sharing",
             200,
             0,
             false
@@ -161,7 +161,7 @@ class LibraryFragment : Fragment() {
             false,
             "Best",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            "https://drive.google.com/file/d/1q9qKi5dmszGuMbqEV7iYG3uCZSbcuXQu/view?usp=sharing",
             200,
             0,
             false
@@ -177,7 +177,7 @@ class LibraryFragment : Fragment() {
             true,
             "Best",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            "https://drive.google.com/file/d/1q9qKi5dmszGuMbqEV7iYG3uCZSbcuXQu/view?usp=sharing",
             200,
             0,
             false
@@ -193,7 +193,7 @@ class LibraryFragment : Fragment() {
             false,
             "Vpop",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            "https://drive.google.com/file/d/1q9qKi5dmszGuMbqEV7iYG3uCZSbcuXQu/view?usp=sharing",
             200,
             0,
             false
@@ -208,7 +208,7 @@ class LibraryFragment : Fragment() {
             false,
             "Vpop",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            "https://drive.google.com/file/d/1q9qKi5dmszGuMbqEV7iYG3uCZSbcuXQu/view?usp=sharing",
             200,
             0,
             false
@@ -223,7 +223,7 @@ class LibraryFragment : Fragment() {
             true,
             "Vpop",
             true,
-            "\"D:\\Music\\ViYeuCuDamDau-MINDenJustaTee-6135242.mp3\"",
+            "https://drive.google.com/file/d/1q9qKi5dmszGuMbqEV7iYG3uCZSbcuXQu/view?usp=sharing",
             200,
             0,
             false

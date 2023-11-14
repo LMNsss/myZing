@@ -118,4 +118,7 @@ dependencies {
 
     annotationProcessor ("android.arch.persistence.room:compiler:1.0.0")
 
+    implementation ("androidx.media:media:1.4.2")
+
+
 }
