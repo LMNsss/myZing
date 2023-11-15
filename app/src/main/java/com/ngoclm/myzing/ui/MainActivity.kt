@@ -1,9 +1,12 @@
 package com.ngoclm.myzing.ui
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.BitmapFactory
+import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -27,6 +30,8 @@ import kotlin.math.log
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mediaPlayer: MediaPlayer
+    private var isPlaying = false
+    private lateinit var selectSong: Song
     private val shareViewModel: MainActivityViewModel by lazy {
         ViewModelProvider(
             this, MainActivityViewModel.ShareViewModelFactory(this.application)
@@ -42,49 +47,25 @@ class MainActivity : AppCompatActivity() {
         events()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        stopMusic()
+    }
+
     private fun initControls() {
         shareViewModel.getLastSong().observe(this, Observer {
             if (it == null) {
                 binding.miniPlayerMusic.visibility = View.INVISIBLE
             } else {
+                selectSong = it
                 binding.miniPlayerMusic.visibility = View.VISIBLE
                 binding.tvSongName.text = it.songName
                 Glide.with(this).load(it.img).into(binding.imgSong)
                 binding.tvSingerName.text = it.singerName
-
-                val filePath= it.filePath
-                Log.d("ngoc", "file: $filePath")
-                binding.icLove.setOnClickListener() {
-
-                }
-                binding.icPlay.setOnClickListener() {
-//                    playMusic(filePath)
-//                    if (mediaPlayer?.isPlaying == true) {
-//                        pauseMusic()
-//                        it.setBackgroundResource(R.drawable.ic_pause)
-//                    } else {
-//                        playMusic(filePath)
-//                        it.setBackgroundResource(R.drawable.ic_play_pause)
-//                    }
-
-                }
+                if (it.love== true) binding.icLove.setImageResource(R.drawable.ic_heart1)
+                else binding.icLove.setImageResource(R.drawable.ic_heart)
             }
-
         })
-    }
-
-    private fun playMusic(url: String) {
-
-            mediaPlayer.setDataSource(url)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-
-    }
-
-    private fun pauseMusic() {
-        if (mediaPlayer.isPlaying) {
-            mediaPlayer.pause()
-        }
     }
 
     private fun events() {
@@ -111,7 +92,61 @@ class MainActivity : AppCompatActivity() {
 
         }
         binding.icLove.setOnClickListener() {
+            if (selectSong.love){
+                selectSong.love = false
+                binding.icLove.setImageResource(R.drawable.ic_heart)
+                shareViewModel.updateSong(selectSong)
+            }else{
+                selectSong.love = true
+                binding.icLove.setImageResource(R.drawable.ic_heart1)
+                shareViewModel.updateSong(selectSong)
+            }
+        }
 
+        shareViewModel.firstPlay.observe(this, Observer {
+            val firstPlay = it
+            binding.icPlay.setOnClickListener() {
+                if (firstPlay == true) {
+                    playMusic(selectSong.filePath)
+                    shareViewModel.secondPlay()
+                    it.setBackgroundResource(R.drawable.ic_pause)
+                } else {
+                    if (mediaPlayer.isPlaying) {
+                        pauseMusic()
+                        it.setBackgroundResource(R.drawable.ic_play_pause)
+                        isPlaying = false
+                    } else {
+                        mediaPlayer.start()
+                        it.setBackgroundResource(R.drawable.ic_pause)
+                        isPlaying = true
+                    }
+                }
+            }
+        })
+
+    }
+
+    private fun playMusic(url: String) {
+        try {
+            mediaPlayer.reset()
+            mediaPlayer.setDataSource(url)
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun pauseMusic() {
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+        }
+    }
+
+    private fun stopMusic() {
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
+            mediaPlayer.prepare()
         }
     }
 

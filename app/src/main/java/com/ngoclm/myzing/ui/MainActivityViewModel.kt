@@ -14,6 +14,18 @@ import kotlinx.coroutines.launch
 @Suppress("UNCHECKED_CAST")
 class MainActivityViewModel(application: Application) : ViewModel() {
     private val repository: SongRepository = SongRepository(application)
+    val _playMusic = MutableLiveData<Int>()
+    val firstPlay = MutableLiveData<Boolean>()
+
+    init {
+        firstPlay.value = true
+    }
+    fun secondPlay() {
+        firstPlay.value = false
+    }
+    fun updateSong(song: Song) = viewModelScope.launch {
+        repository.updateSong(song)
+    }
 
     fun getLastSong() = repository.getLastSong(true)
 

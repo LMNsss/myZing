@@ -9,7 +9,7 @@ data class Song(
     @ColumnInfo(name = "img") val img: String,
     @ColumnInfo(name = "song_name") val songName: String,
     @ColumnInfo(name = "singer_name") val singerName: String,
-    @ColumnInfo(name = "love") val love: Boolean = false,
+    @ColumnInfo(name = "love") var love: Boolean = false,
     @ColumnInfo(name = "recently") var recently: Boolean = false,
     @ColumnInfo(name = "play_list") val playList: String,
     @ColumnInfo(name = "downloaded") var downloaded: Boolean = false,

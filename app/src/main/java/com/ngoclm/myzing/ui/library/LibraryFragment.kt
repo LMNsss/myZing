@@ -1,5 +1,6 @@
 package com.ngoclm.myzing.ui.library
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,7 +23,7 @@ import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 
 class LibraryFragment : Fragment() {
     private lateinit var binding: FragmentLibraryBinding
-
+    private lateinit var mediaPlayer: MediaPlayer
     //    private lateinit var lastSong: Song
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
@@ -39,6 +40,7 @@ class LibraryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentLibraryBinding.inflate(layoutInflater)
+        mediaPlayer = MediaPlayer()
         return binding.root
     }
 
@@ -76,6 +78,7 @@ class LibraryFragment : Fragment() {
                 song.listensNumber += 1
                 myViewModel.updateSong(song)
                 Toast.makeText(context, "Đang phát ${song.songName}", Toast.LENGTH_SHORT).show()
+
             }
         })
         binding.rvListenRecently.setHasFixedSize(true)
@@ -130,7 +133,7 @@ class LibraryFragment : Fragment() {
             true,
             "Vpop",
             true,
-            "https://drive.google.com/file/d/1-owaGvQfUocVycBBjEjUrS9rOSgkViBc/view?usp=sharing",
+            "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
             200,
             0,
             false
@@ -145,7 +148,7 @@ class LibraryFragment : Fragment() {
             true,
             "Vpop",
             true,
-            "https://drive.google.com/file/d/1-owaGvQfUocVycBBjEjUrS9rOSgkViBc/view?usp=sharing",
+            "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
             200,
             0,
             false
@@ -161,7 +164,7 @@ class LibraryFragment : Fragment() {
             false,
             "Best",
             true,
-            "https://drive.google.com/file/d/1q9qKi5dmszGuMbqEV7iYG3uCZSbcuXQu/view?usp=sharing",
+            "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
             200,
             0,
             false
@@ -177,7 +180,7 @@ class LibraryFragment : Fragment() {
             true,
             "Best",
             true,
-            "https://drive.google.com/file/d/1q9qKi5dmszGuMbqEV7iYG3uCZSbcuXQu/view?usp=sharing",
+            "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
             200,
             0,
             false
@@ -193,7 +196,7 @@ class LibraryFragment : Fragment() {
             false,
             "Vpop",
             true,
-            "https://drive.google.com/file/d/1q9qKi5dmszGuMbqEV7iYG3uCZSbcuXQu/view?usp=sharing",
+            "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
             200,
             0,
             false
@@ -208,7 +211,7 @@ class LibraryFragment : Fragment() {
             false,
             "Vpop",
             true,
-            "https://drive.google.com/file/d/1q9qKi5dmszGuMbqEV7iYG3uCZSbcuXQu/view?usp=sharing",
+            "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
             200,
             0,
             false
@@ -223,7 +226,7 @@ class LibraryFragment : Fragment() {
             true,
             "Vpop",
             true,
-            "https://drive.google.com/file/d/1q9qKi5dmszGuMbqEV7iYG3uCZSbcuXQu/view?usp=sharing",
+            "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
             200,
             0,
             false
