@@ -125,6 +125,7 @@
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
                                 android:layout_gravity="center"
+                                android:tint="@color/white"
                                 android:src="@drawable/ic_heart" />
 
                             <androidx.appcompat.widget.AppCompatTextView

@@ -13,12 +13,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.ngoclm.myzing.R
 import com.ngoclm.myzing.base.entities.Song
 import com.ngoclm.myzing.base.interaction.onClickListener
 import com.ngoclm.myzing.databinding.FragmentLibraryBinding
 import com.ngoclm.myzing.ui.MainActivityViewModel
 import com.ngoclm.myzing.ui.adapter.PlayListAndAlbumPagerAdapter
 import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
+import com.ngoclm.myzing.ui.library.dowloaded.DowloadedFragment
+import kotlin.math.log
 
 
 class LibraryFragment : Fragment() {
@@ -36,25 +39,28 @@ class LibraryFragment : Fragment() {
         )[MainActivityViewModel::class.java]
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentLibraryBinding.inflate(layoutInflater)
+//        addSong()
+        initControls()
+        tablayout()
         mediaPlayer = MediaPlayer()
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        addSong()
-        tablayout()
         viewpagerCallBack()
-        initControls()
-    }
-
-    private fun events() {
-
+        events()
+        myViewModel.loadLocalSongs().observe(viewLifecycleOwner, Observer {
+            Log.d("ngoc", it.toString())
+        })
     }
 
     private fun initControls() {
@@ -88,7 +94,18 @@ class LibraryFragment : Fragment() {
         myViewModel.getSongByRecently(true).observe(viewLifecycleOwner, Observer {
             adapter.setSong(it)
         })
+    }
 
+    fun events(){
+        binding.itemDowloaded.setOnClickListener(){
+            replaceFragment(DowloadedFragment())
+        }
+    }
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = childFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.layout_container, fragment)
+        fragmentTransaction.commit()
     }
 
     private fun viewpagerCallBack() {
