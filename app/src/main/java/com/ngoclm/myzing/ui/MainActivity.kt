@@ -86,8 +86,6 @@ class MainActivity : AppCompatActivity() {
             val dialogBottomSheet = PlaySongFragment()
             dialogBottomSheet.show(supportFragmentManager, "bottom-sheet")
         }
-
-
         binding.icNextSong.setOnClickListener() {
 
         }

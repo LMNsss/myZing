@@ -427,8 +427,17 @@
                 app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.97"
                 app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.03"
                 app:layout_constraintTop_toBottomOf="@id/tab_layout" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <FrameLayout
+                android:id="@+id/layout_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
 </layout>

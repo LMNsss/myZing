@@ -14,9 +14,14 @@ import kotlinx.coroutines.launch
 @Suppress("UNCHECKED_CAST")
 class MainActivityViewModel(application: Application) : ViewModel() {
     private val repository: SongRepository = SongRepository(application)
-    val _playMusic = MutableLiveData<Int>()
+    private val _selectedSong = MutableLiveData<Song>()
     val firstPlay = MutableLiveData<Boolean>()
+    val selectedSong: LiveData<Song>
+        get() = _selectedSong
 
+    fun setSelectedSong(song: Song){
+        _selectedSong.value = song
+    }
     init {
         firstPlay.value = true
     }
@@ -28,7 +33,6 @@ class MainActivityViewModel(application: Application) : ViewModel() {
     }
 
     fun getLastSong() = repository.getLastSong(true)
-
     class ShareViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainActivityViewModel::class.java)) {
