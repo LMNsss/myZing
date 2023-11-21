@@ -47,15 +47,6 @@ class LibraryViewModel(application: Application) : ViewModel() {
 
         // Xử lý dữ liệu từ Cursor và chuyển đổi thành List<Song>
         val songList = mutableListOf<Song>()
-//        cursor?.use {
-//            while (it.moveToNext()) {
-//                val img = it.getString(it.getColumnIndexOrThrow("img"))
-//                val songName = it.getString(it.getColumnIndexOrThrow("song_name"))
-//                val singerName = it.getString(it.getColumnIndexOrThrow("singer_name"))
-//                val song = Song(img,songName, singerName, false, false, "local", false, "", 0, 0, false)
-//                songList.add(song)
-//            }
-//        }
         cursor?.use {
             val dataIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.DATA)
             val titleIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.TITLE)

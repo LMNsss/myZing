@@ -27,7 +27,7 @@ import kotlin.math.log
 class LibraryFragment : Fragment() {
     private lateinit var binding: FragmentLibraryBinding
     private lateinit var mediaPlayer: MediaPlayer
-    //    private lateinit var lastSong: Song
+    private var lastSong: Song? = null
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
@@ -35,7 +35,7 @@ class LibraryFragment : Fragment() {
     }
     private val shareViewModel: MainActivityViewModel by lazy {
         ViewModelProvider(
-            this, MainActivityViewModel.ShareViewModelFactory(requireActivity().application)
+            requireActivity().viewModelStore, MainActivityViewModel.ShareViewModelFactory(requireActivity().application)
         )[MainActivityViewModel::class.java]
     }
 
@@ -58,19 +58,18 @@ class LibraryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewpagerCallBack()
         events()
-        myViewModel.loadLocalSongs().observe(viewLifecycleOwner, Observer {
-            Log.d("ngoc", it.toString())
-        })
+
     }
 
     private fun initControls() {
-        var lastSong: Song? = null
         shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
             lastSong = it
         })
         val adapter = RecentlyListAdapter(object : onClickListener {
             override fun onClickItem(song: Song) {
                 super.onClickItem(song)
+                shareViewModel.setStartApp(false)
+                shareViewModel.setSelectedSong(song)
                 if (!song.recently) {
                     song.recently = true
                 }
@@ -84,22 +83,30 @@ class LibraryFragment : Fragment() {
                 song.listensNumber += 1
                 myViewModel.updateSong(song)
                 Toast.makeText(context, "Đang phát ${song.songName}", Toast.LENGTH_SHORT).show()
-
             }
+
         })
         binding.rvListenRecently.setHasFixedSize(true)
         binding.rvListenRecently.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvListenRecently.adapter = adapter
+
+//        myViewModel.loadLocalSongs().observe(viewLifecycleOwner, Observer {
+//            adapter.setSong(it)
+//        })
+
         myViewModel.getSongByRecently(true).observe(viewLifecycleOwner, Observer {
             adapter.setSong(it)
         })
+
     }
 
     fun events(){
         binding.itemDowloaded.setOnClickListener(){
             replaceFragment(DowloadedFragment())
+
         }
+
     }
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = childFragmentManager
@@ -118,7 +125,6 @@ class LibraryFragment : Fragment() {
                     binding.icMenuPlaylist.visibility = View.INVISIBLE
                     Log.d("hieu", "onPageSelected: 2")
                 }
-
                 super.onPageSelected(position)
             }
         })

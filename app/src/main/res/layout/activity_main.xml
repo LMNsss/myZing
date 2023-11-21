@@ -58,14 +58,14 @@
                 android:id="@+id/tv_song_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Em Có Yêu Anh Không"
+                android:hint="Unknown"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_singer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Only C"
+                android:hint="unknown"
                 android:textStyle="bold" />
         </LinearLayout>
 
