@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     private fun initControls() {
         shareViewModel.startApp.observe(this, Observer {
             startApp = it
+
         })
 
         shareViewModel.getSelectedSong().observe(this, Observer {

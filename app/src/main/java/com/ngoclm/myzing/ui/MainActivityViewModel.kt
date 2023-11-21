@@ -29,6 +29,7 @@ class MainActivityViewModel(application: Application) : ViewModel() {
         }
     }
 
+
     init {
         firstPlay.value = true
         startApp.value = true

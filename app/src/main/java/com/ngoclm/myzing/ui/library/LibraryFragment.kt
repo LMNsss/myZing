@@ -85,6 +85,7 @@ class LibraryFragment : Fragment() {
                 Toast.makeText(context, "Đang phát ${song.songName}", Toast.LENGTH_SHORT).show()
             }
 
+
         })
         binding.rvListenRecently.setHasFixedSize(true)
         binding.rvListenRecently.layoutManager =

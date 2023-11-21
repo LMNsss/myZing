@@ -17,6 +17,7 @@ class SingleLiveData<T> : MutableLiveData<T>() {
             }
         })
     }
+
     @MainThread
     override fun setValue(value: T) {
         isPending = true
