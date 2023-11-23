@@ -13,21 +13,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import com.ngoclm.myzing.R
 import com.ngoclm.myzing.base.entities.Song
 import com.ngoclm.myzing.base.interaction.onClickListener
 import com.ngoclm.myzing.databinding.FragmentLibraryBinding
 import com.ngoclm.myzing.ui.MainActivityViewModel
 import com.ngoclm.myzing.ui.adapter.PlayListAndAlbumPagerAdapter
 import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
-import com.ngoclm.myzing.ui.library.dowloaded.DowloadedFragment
-import kotlin.math.log
 
 
 class LibraryFragment : Fragment() {
     private lateinit var binding: FragmentLibraryBinding
     private lateinit var mediaPlayer: MediaPlayer
-    private var lastSong: Song? = null
+    //    private lateinit var lastSong: Song
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
@@ -35,41 +32,39 @@ class LibraryFragment : Fragment() {
     }
     private val shareViewModel: MainActivityViewModel by lazy {
         ViewModelProvider(
-            requireActivity().viewModelStore, MainActivityViewModel.ShareViewModelFactory(requireActivity().application)
+            this, MainActivityViewModel.ShareViewModelFactory(requireActivity().application)
         )[MainActivityViewModel::class.java]
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentLibraryBinding.inflate(layoutInflater)
-//        addSong()
-        initControls()
-        tablayout()
         mediaPlayer = MediaPlayer()
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        addSong()
+        tablayout()
         viewpagerCallBack()
-        events()
+        initControls()
+    }
+
+    private fun events() {
 
     }
 
     private fun initControls() {
+        var lastSong: Song? = null
         shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
             lastSong = it
         })
         val adapter = RecentlyListAdapter(object : onClickListener {
             override fun onClickItem(song: Song) {
                 super.onClickItem(song)
-                shareViewModel.setStartApp(false)
-                shareViewModel.setSelectedSong(song)
                 if (!song.recently) {
                     song.recently = true
                 }
@@ -83,37 +78,17 @@ class LibraryFragment : Fragment() {
                 song.listensNumber += 1
                 myViewModel.updateSong(song)
                 Toast.makeText(context, "Đang phát ${song.songName}", Toast.LENGTH_SHORT).show()
+
             }
-
-
         })
         binding.rvListenRecently.setHasFixedSize(true)
         binding.rvListenRecently.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvListenRecently.adapter = adapter
-
-//        myViewModel.loadLocalSongs().observe(viewLifecycleOwner, Observer {
-//            adapter.setSong(it)
-//        })
-
         myViewModel.getSongByRecently(true).observe(viewLifecycleOwner, Observer {
             adapter.setSong(it)
         })
 
-    }
-
-    fun events(){
-        binding.itemDowloaded.setOnClickListener(){
-            replaceFragment(DowloadedFragment())
-
-        }
-
-    }
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentManager = childFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.layout_container, fragment)
-        fragmentTransaction.commit()
     }
 
     private fun viewpagerCallBack() {
@@ -126,6 +101,7 @@ class LibraryFragment : Fragment() {
                     binding.icMenuPlaylist.visibility = View.INVISIBLE
                     Log.d("hieu", "onPageSelected: 2")
                 }
+
                 super.onPageSelected(position)
             }
         })
