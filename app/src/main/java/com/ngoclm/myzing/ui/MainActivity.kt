@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mediaPlayer: MediaPlayer
     private var isPlaying = false
+    private var startApp = false
     private lateinit var selectSong: Song
     private val shareViewModel: MainActivityViewModel by lazy {
         ViewModelProvider(
@@ -53,7 +54,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initControls() {
-        shareViewModel.getLastSong().observe(this, Observer {
+        shareViewModel.startApp.observe(this, Observer {
+            startApp = it
+            Log.d("startApp", it.toString())
+        })
+
+        shareViewModel.selectedSong.observe(this, Observer {
             if (it == null) {
                 binding.miniPlayerMusic.visibility = View.INVISIBLE
             } else {
@@ -62,8 +68,13 @@ class MainActivity : AppCompatActivity() {
                 binding.tvSongName.text = it.songName
                 Glide.with(this).load(it.img).into(binding.imgSong)
                 binding.tvSingerName.text = it.singerName
-                if (it.love== true) binding.icLove.setImageResource(R.drawable.ic_heart1)
+                if (it.love) binding.icLove.setImageResource(R.drawable.ic_heart1)
                 else binding.icLove.setImageResource(R.drawable.ic_heart)
+                if (!startApp) {
+                    playMusic(it.filePath)
+                    binding.icPlay.setBackgroundResource(R.drawable.ic_pause)
+                    shareViewModel.secondPlay()
+                }
             }
         })
     }
@@ -82,27 +93,23 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
         binding.miniPlayerMusic.setOnClickListener() {
             val dialogBottomSheet = PlaySongFragment()
             dialogBottomSheet.show(supportFragmentManager, "bottom-sheet")
         }
 
-
-        binding.icNextSong.setOnClickListener() {
-
-        }
         binding.icLove.setOnClickListener() {
-            if (selectSong.love){
+            if (selectSong.love) {
                 selectSong.love = false
                 binding.icLove.setImageResource(R.drawable.ic_heart)
                 shareViewModel.updateSong(selectSong)
-            }else{
+            } else {
                 selectSong.love = true
                 binding.icLove.setImageResource(R.drawable.ic_heart1)
                 shareViewModel.updateSong(selectSong)
             }
         }
-
         shareViewModel.firstPlay.observe(this, Observer {
             val firstPlay = it
             binding.icPlay.setOnClickListener() {
@@ -124,6 +131,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        binding.icNextSong.setOnClickListener() {
+        }
     }
 
     private fun playMusic(url: String) {

@@ -29,5 +29,5 @@ interface SongDao {
     fun getItemByRecently(recently: Boolean):LiveData<List<Song>>
 
     @Query("SELECT * FROM SONG_TABLE WHERE song_last = :songLast")
-    fun getLastSong(songLast: Boolean): LiveData<Song>
+    fun getLastSong(songLast: Boolean): Song
 }

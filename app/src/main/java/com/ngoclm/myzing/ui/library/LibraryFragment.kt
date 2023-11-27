@@ -13,18 +13,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.ngoclm.myzing.R
 import com.ngoclm.myzing.base.entities.Song
 import com.ngoclm.myzing.base.interaction.onClickListener
 import com.ngoclm.myzing.databinding.FragmentLibraryBinding
 import com.ngoclm.myzing.ui.MainActivityViewModel
 import com.ngoclm.myzing.ui.adapter.PlayListAndAlbumPagerAdapter
 import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
+import com.ngoclm.myzing.ui.library.dowloaded.DowloadedFragment
+import kotlin.math.log
 
 
 class LibraryFragment : Fragment() {
     private lateinit var binding: FragmentLibraryBinding
     private lateinit var mediaPlayer: MediaPlayer
-    //    private lateinit var lastSong: Song
+    private lateinit var lastSong: Song
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
@@ -32,63 +35,85 @@ class LibraryFragment : Fragment() {
     }
     private val shareViewModel: MainActivityViewModel by lazy {
         ViewModelProvider(
-            this, MainActivityViewModel.ShareViewModelFactory(requireActivity().application)
+            requireActivity().viewModelStore,
+            MainActivityViewModel.ShareViewModelFactory(requireActivity().application)
         )[MainActivityViewModel::class.java]
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentLibraryBinding.inflate(layoutInflater)
+//        addSong()
+        initControls()
+        tablayout()
         mediaPlayer = MediaPlayer()
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        addSong()
-        tablayout()
         viewpagerCallBack()
-        initControls()
-    }
-
-    private fun events() {
+        events()
 
     }
 
     private fun initControls() {
-        var lastSong: Song? = null
-        shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
-            lastSong = it
+        shareViewModel.selectedSong.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                lastSong = it
+            }
         })
+
         val adapter = RecentlyListAdapter(object : onClickListener {
             override fun onClickItem(song: Song) {
                 super.onClickItem(song)
-                if (!song.recently) {
-                    song.recently = true
-                }
-                if (lastSong != null && song.id != lastSong!!.id) {
+                shareViewModel.setStartApp(false)
+                shareViewModel.setSelectedSong(song)
+                if (lastSong != null && song.id != lastSong.id) {
                     song.last = true
-                    lastSong!!.last = false
-                    myViewModel.updateSong(lastSong!!)
+                    lastSong.last = false
+                    myViewModel.updateSong(lastSong)
+                    Log.d("name", lastSong.toString())
                 } else {
                     song.last = true
                 }
                 song.listensNumber += 1
                 myViewModel.updateSong(song)
                 Toast.makeText(context, "Đang phát ${song.songName}", Toast.LENGTH_SHORT).show()
-
             }
         })
         binding.rvListenRecently.setHasFixedSize(true)
         binding.rvListenRecently.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvListenRecently.adapter = adapter
+
+        myViewModel.loadLocalSongs().observe(viewLifecycleOwner, Observer {
+            Log.d("song", it.toString())
+
+        })
+
         myViewModel.getSongByRecently(true).observe(viewLifecycleOwner, Observer {
             adapter.setSong(it)
         })
+    }
 
+    fun events() {
+        binding.itemDowloaded.setOnClickListener() {
+            replaceFragment(DowloadedFragment())
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = childFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.layout_container, fragment)
+        fragmentTransaction.commit()
     }
 
     private fun viewpagerCallBack() {
@@ -96,12 +121,11 @@ class LibraryFragment : Fragment() {
             override fun onPageSelected(position: Int) {
                 if (position == 0) {
                     binding.icMenuPlaylist.visibility = View.VISIBLE
-                    Log.d("hieu", "onPageSelected: 1")
+                    Log.d("pager", "onPageSelected: playlist")
                 } else if (position == 1) {
                     binding.icMenuPlaylist.visibility = View.INVISIBLE
-                    Log.d("hieu", "onPageSelected: 2")
+                    Log.d("pager", "onPageSelected: album")
                 }
-
                 super.onPageSelected(position)
             }
         })

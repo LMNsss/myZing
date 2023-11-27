@@ -25,19 +25,19 @@ class InfoSongFragment : Fragment() {
         shareViewModel = activity?.run {
             ViewModelProvider(this)[MainActivityViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
-        addEvent()
+//        addEvent()
         return binding.root
     }
 
-    private fun addEvent(){
-        shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
-            Glide.with(this).load(it.img).into(binding.imgSong)
-            binding.tvSongName.text = it.songName
-            binding.tvSingerName.text = it.singerName
-            binding.tvDetailArtist.text = it.singerName
-            binding.tvLikeNumber.text = it.loveNumber.toString()
-            binding.tvListenNumber.text = it.listensNumber.toString()
-        })
-    }
+//    private fun addEvent(){
+//        shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
+//            Glide.with(this).load(it.img).into(binding.imgSong)
+//            binding.tvSongName.text = it.songName
+//            binding.tvSingerName.text = it.singerName
+//            binding.tvDetailArtist.text = it.singerName
+//            binding.tvLikeNumber.text = it.loveNumber.toString()
+//            binding.tvListenNumber.text = it.listensNumber.toString()
+//        })
+//    }
 
 }
