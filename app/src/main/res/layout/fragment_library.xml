@@ -189,7 +189,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="Bài hát yêu thích"
+                                android:text="@string/love_song"
                                 android:maxLines="1"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -199,7 +199,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="5dp"
-                                android:text="200" />
+                                android:tooltipText="200" />
 
                         </LinearLayout>
 
@@ -241,7 +241,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="5dp"
-                                android:text="200" />
+                                android:tooltipText="200" />
 
                         </LinearLayout>
 
@@ -282,7 +282,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="5dp"
-                                android:text="200" />
+                                android:tooltipText="200" />
 
                         </LinearLayout>
 
@@ -315,7 +315,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="Bài hát yêu thích"
+                                android:text="@string/upload"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
@@ -324,7 +324,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="5dp"
-                                android:text="200" />
+                                android:tooltipText="200" />
 
                         </LinearLayout>
 
@@ -356,7 +356,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="Bài hát yêu thích"
+                                android:text="@string/mv"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
@@ -365,7 +365,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="5dp"
-                                android:text="200" />
+                                android:tooltipText="200" />
 
                         </LinearLayout>
 
@@ -434,9 +434,10 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

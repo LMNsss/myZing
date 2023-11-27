@@ -29,5 +29,11 @@ interface SongDao {
     fun getItemByRecently(recently: Boolean):LiveData<List<Song>>
 
     @Query("SELECT * FROM SONG_TABLE WHERE song_last = :songLast")
-    fun getLastSong(songLast: Boolean): LiveData<Song>
+    fun getLastSong(songLast: Boolean): Song
+
+    @Query("SELECT COUNT(love) FROM song_table WHERE love = :loveSongNumber")
+    fun getLoveSongNumber(loveSongNumber: Boolean): LiveData<Int>
+
+    @Query("SELECT COUNT(DISTINCT singer_name) FROM song_table")
+    fun getSingerNumber(): LiveData<Int>
 }

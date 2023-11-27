@@ -30,13 +30,15 @@ class InfoSongFragment : Fragment() {
     }
 
     private fun addEvent(){
-        shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
-            Glide.with(this).load(it.img).into(binding.imgSong)
-            binding.tvSongName.text = it.songName
-            binding.tvSingerName.text = it.singerName
-            binding.tvDetailArtist.text = it.singerName
-            binding.tvLikeNumber.text = it.loveNumber.toString()
-            binding.tvListenNumber.text = it.listensNumber.toString()
+        shareViewModel.selectedSong.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                Glide.with(this).load(it.img).into(binding.imgSong)
+                binding.tvSongName.text = it.songName
+                binding.tvSingerName.text = it.singerName
+                binding.tvDetailArtist.text = it.singerName
+                binding.tvLikeNumber.text = it.loveNumber.toString()
+                binding.tvListenNumber.text = it.listensNumber.toString()
+            }
         })
     }
 

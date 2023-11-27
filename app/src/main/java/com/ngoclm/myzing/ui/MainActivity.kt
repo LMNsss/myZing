@@ -1,15 +1,12 @@
 package com.ngoclm.myzing.ui
 
-import android.app.Activity
-import android.content.Context
-import android.graphics.BitmapFactory
-import android.media.AudioAttributes
+
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.AttributeSet
+
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -24,13 +21,12 @@ import com.ngoclm.myzing.ui.playSong.PlaySongFragment
 import com.ngoclm.myzing.ui.profile.ProfileFragment
 import com.ngoclm.myzing.ui.radio.RadioFragment
 import com.ngoclm.myzing.ui.zingchart.ZingchartFragment
-import kotlin.math.log
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mediaPlayer: MediaPlayer
     private var isPlaying = false
+    private var startApp = false
     private lateinit var selectSong: Song
     private val shareViewModel: MainActivityViewModel by lazy {
         ViewModelProvider(
@@ -46,14 +42,17 @@ class MainActivity : AppCompatActivity() {
         initControls()
         events()
     }
-
     override fun onDestroy() {
         super.onDestroy()
         stopMusic()
     }
-
     private fun initControls() {
-        shareViewModel.getLastSong().observe(this, Observer {
+        shareViewModel.startApp.observe(this, Observer {
+            startApp = it
+            Log.d("startApp", it.toString())
+        })
+
+        shareViewModel.selectedSong.observe(this, Observer {
             if (it == null) {
                 binding.miniPlayerMusic.visibility = View.INVISIBLE
             } else {
@@ -62,8 +61,13 @@ class MainActivity : AppCompatActivity() {
                 binding.tvSongName.text = it.songName
                 Glide.with(this).load(it.img).into(binding.imgSong)
                 binding.tvSingerName.text = it.singerName
-                if (it.love== true) binding.icLove.setImageResource(R.drawable.ic_heart1)
+                if (it.love) binding.icLove.setImageResource(R.drawable.ic_heart1)
                 else binding.icLove.setImageResource(R.drawable.ic_heart)
+                if (!startApp) {
+                    playMusic(it.filePath)
+                    binding.icPlay.setBackgroundResource(R.drawable.ic_pause)
+                    shareViewModel.secondPlay()
+                }
             }
         })
     }
@@ -82,27 +86,25 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
         binding.miniPlayerMusic.setOnClickListener() {
             val dialogBottomSheet = PlaySongFragment()
             dialogBottomSheet.show(supportFragmentManager, "bottom-sheet")
         }
 
-
-        binding.icNextSong.setOnClickListener() {
-
-        }
         binding.icLove.setOnClickListener() {
-            if (selectSong.love){
+            if (selectSong.love) {
                 selectSong.love = false
                 binding.icLove.setImageResource(R.drawable.ic_heart)
                 shareViewModel.updateSong(selectSong)
-            }else{
+                Toast.makeText(this, "Đã bỏ thích bài hát ${selectSong.songName}", Toast.LENGTH_SHORT).show()
+            } else {
                 selectSong.love = true
                 binding.icLove.setImageResource(R.drawable.ic_heart1)
                 shareViewModel.updateSong(selectSong)
+                Toast.makeText(this, "Đã thích bài hát ${selectSong.songName}", Toast.LENGTH_SHORT).show()
             }
         }
-
         shareViewModel.firstPlay.observe(this, Observer {
             val firstPlay = it
             binding.icPlay.setOnClickListener() {
@@ -124,6 +126,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        binding.icNextSong.setOnClickListener() {
+        }
     }
 
     private fun playMusic(url: String) {

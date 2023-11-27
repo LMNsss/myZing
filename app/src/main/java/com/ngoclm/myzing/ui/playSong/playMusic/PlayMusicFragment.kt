@@ -30,12 +30,12 @@ class PlayMusicFragment : Fragment() {
     }
 
     private fun addEvent() {
-        shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
-            Glide.with(this).load(it.img).into(binding.imgSong)
-            binding.tvSongName.text = it.songName
-            binding.tvSingerName.text = it.singerName
+        shareViewModel.selectedSong.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                Glide.with(this).load(it.img).into(binding.imgSong)
+                binding.tvSongName.text = it.songName
+                binding.tvSingerName.text = it.singerName
+            }
         })
     }
-
-
 }

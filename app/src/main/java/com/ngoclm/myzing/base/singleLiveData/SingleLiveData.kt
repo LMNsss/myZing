@@ -5,23 +5,31 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import java.util.concurrent.atomic.AtomicBoolean
 
-class SingleLiveData<T> : MutableLiveData<T>() {
-    private var isPending = false
+class SingleLiveEvent<T> : MutableLiveData<T>() {
+    private val mConsumed = AtomicBoolean(false)
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
-        super.observe(owner, Observer<T> { t ->
-            if (isPending) {
-                isPending = false
-                observer.onChanged(t)
+    @MainThread
+    fun observeSingle(owner: LifecycleOwner, observer: Observer<T>) {
+        super.observe(
+            owner,
+            Observer { t ->
+                if (mConsumed.compareAndSet(false, true)) {
+                    observer.onChanged(t)
+                }
             }
-        })
+        )
     }
 
     @MainThread
-    override fun setValue(value: T) {
-        isPending = true
-        super.setValue(value)
+    override fun setValue(t: T?) {
+        mConsumed.set(false)
+        super.setValue(t)
     }
 
+    override fun postValue(value: T?) {
+        mConsumed.set(false)
+        super.postValue(value)
+    }
 }
