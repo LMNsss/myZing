@@ -30,10 +30,13 @@ interface SongDao {
 
     @Query("SELECT * FROM SONG_TABLE WHERE song_last = :songLast")
     fun getLastSong(songLast: Boolean): Song
+<<<<<<< HEAD
 
     @Query("SELECT COUNT(love) FROM song_table WHERE love = :loveSongNumber")
     fun getLoveSongNumber(loveSongNumber: Boolean): LiveData<Int>
 
     @Query("SELECT COUNT(DISTINCT singer_name) FROM song_table")
     fun getSingerNumber(): LiveData<Int>
+=======
+>>>>>>> 441aad5502ac2296d61763bbddf9e801ede6436e
 }

@@ -33,6 +33,47 @@ class LibraryViewModel(application: Application) : ViewModel() {
 
     fun loadLocalSongs(): LiveData<List<Song>> {
         val songs = MutableLiveData<List<Song>>()
+<<<<<<< HEAD
+=======
+
+        // Thực hiện truy vấn thông qua ContentProvider
+        val cursor = contentResolver.query(
+            AppContentProvider.CONTENT_URI,
+            null,
+            null,
+            null,
+            null
+        )
+
+        // Xử lý dữ liệu từ Cursor và chuyển đổi thành List<Song>
+        val songList = mutableListOf<Song>()
+        cursor?.use {
+            val dataIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.DATA)
+            val titleIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.TITLE)
+
+            while (cursor.moveToNext()) {
+                val filePath = cursor.getString(dataIndex)
+                val title = cursor.getString(titleIndex)
+                val song = Song(
+                    "https://cdn.sforum.vn/sforum/wp-content/uploads/2021/07/lol-t1-1.jpg",
+                    title,
+                    "Unknown",
+                    false,
+                    false,
+                    "local",
+                    false,
+                    filePath,
+                    0,
+                    0,
+                    false
+                )
+                songList.add(song)
+            }
+        }
+        songs.value = songList
+        return songs
+    }
+>>>>>>> 441aad5502ac2296d61763bbddf9e801ede6436e
 
         // Thực hiện truy vấn thông qua ContentProvider
         val cursor = contentResolver.query(
