@@ -22,6 +22,7 @@ import com.ngoclm.myzing.ui.MainActivityViewModel
 import com.ngoclm.myzing.ui.adapter.PlayListAndAlbumPagerAdapter
 import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 import com.ngoclm.myzing.ui.library.dowloaded.DowloadedFragment
+import com.ngoclm.myzing.ui.library.lovedSong.LoveSongFragment
 
 
 class LibraryFragment : Fragment() {
@@ -108,6 +109,9 @@ class LibraryFragment : Fragment() {
     fun events() {
         binding.itemDowloaded.setOnClickListener() {
             replaceFragment(DowloadedFragment())
+        }
+        binding.itemLoveSong.setOnClickListener(){
+            replaceFragment(LoveSongFragment())
         }
     }
 

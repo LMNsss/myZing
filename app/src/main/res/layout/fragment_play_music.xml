@@ -85,6 +85,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.9"
+                android:backgroundTint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -275,7 +276,7 @@
                     android:layout_margin="5dp"
                     android:text="128 Kbps"
                     android:textAlignment="center"
-                    android:textColor="#DDCFCF"
+                    android:textColor="#838383"
                     android:textSize="15sp" />
 
             </androidx.cardview.widget.CardView>

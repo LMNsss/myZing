@@ -25,7 +25,7 @@ import com.ngoclm.myzing.ui.zingchart.ZingchartFragment
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mediaPlayer: MediaPlayer
-    private var isPlaying = false
+    private var isPlaying= false
     private var startApp = false
     private lateinit var selectSong: Song
     private val shareViewModel: MainActivityViewModel by lazy {
@@ -52,6 +52,18 @@ class MainActivity : AppCompatActivity() {
             Log.d("startApp", it.toString())
         })
 
+        shareViewModel.isPlaying.observe(this, Observer {
+            isPlaying = it
+            if (isPlaying){
+                binding.icPlay.setImageResource(R.drawable.ic_pause)
+                mediaPlayer.start()
+            }
+            else{
+                binding.icPlay.setImageResource(R.drawable.ic_play_pause)
+                mediaPlayer.pause()
+            }
+        })
+
         shareViewModel.selectedSong.observe(this, Observer {
             if (it == null) {
                 binding.miniPlayerMusic.visibility = View.INVISIBLE
@@ -65,8 +77,9 @@ class MainActivity : AppCompatActivity() {
                 else binding.icLove.setImageResource(R.drawable.ic_heart)
                 if (!startApp) {
                     playMusic(it.filePath)
-                    binding.icPlay.setBackgroundResource(R.drawable.ic_pause)
+//                    binding.icPlay.setImageResource(R.drawable.ic_pause)
                     shareViewModel.secondPlay()
+                    shareViewModel.setPlaying(true)
                 }
             }
         })
@@ -111,16 +124,14 @@ class MainActivity : AppCompatActivity() {
                 if (firstPlay == true) {
                     playMusic(selectSong.filePath)
                     shareViewModel.secondPlay()
-                    it.setBackgroundResource(R.drawable.ic_pause)
+                    shareViewModel.setPlaying(true)
                 } else {
                     if (mediaPlayer.isPlaying) {
                         pauseMusic()
-                        it.setBackgroundResource(R.drawable.ic_play_pause)
-                        isPlaying = false
+                        shareViewModel.setPlaying(false)
                     } else {
                         mediaPlayer.start()
-                        it.setBackgroundResource(R.drawable.ic_pause)
-                        isPlaying = true
+                        shareViewModel.setPlaying(true)
                     }
                 }
             }
@@ -128,6 +139,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.icNextSong.setOnClickListener() {
         }
+
+
     }
 
     private fun playMusic(url: String) {
