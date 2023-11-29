@@ -97,10 +97,7 @@ class MainActivity : AppCompatActivity() {
                 selectSong.love = false
                 binding.icLove.setImageResource(R.drawable.ic_heart)
                 shareViewModel.updateSong(selectSong)
-<<<<<<< HEAD
                 Toast.makeText(this, "Đã bỏ thích bài hát ${selectSong.songName}", Toast.LENGTH_SHORT).show()
-=======
->>>>>>> 441aad5502ac2296d61763bbddf9e801ede6436e
             } else {
                 selectSong.love = true
                 binding.icLove.setImageResource(R.drawable.ic_heart1)

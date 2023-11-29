@@ -9,10 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -24,23 +22,17 @@ import com.ngoclm.myzing.ui.MainActivityViewModel
 import com.ngoclm.myzing.ui.adapter.PlayListAndAlbumPagerAdapter
 import com.ngoclm.myzing.ui.adapter.RecentlyListAdapter
 import com.ngoclm.myzing.ui.library.dowloaded.DowloadedFragment
-import kotlin.math.log
 
 
 class LibraryFragment : Fragment() {
     private lateinit var binding: FragmentLibraryBinding
     private lateinit var mediaPlayer: MediaPlayer
-<<<<<<< HEAD
     private  var lastSong: Song? = null
-=======
-    private lateinit var lastSong: Song
->>>>>>> 441aad5502ac2296d61763bbddf9e801ede6436e
     private val myViewModel: LibraryViewModel by lazy {
         ViewModelProvider(
             this, LibraryViewModel.SongViewModelFactory(requireActivity().application)
         )[LibraryViewModel::class.java]
     }
-<<<<<<< HEAD
 //    private val shareViewModel: MainActivityViewModel by lazy {
 //        ViewModelProvider(
 //            requireActivity(),
@@ -53,18 +45,6 @@ class LibraryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-=======
-    private val shareViewModel: MainActivityViewModel by lazy {
-        ViewModelProvider(
-            requireActivity().viewModelStore,
-            MainActivityViewModel.ShareViewModelFactory(requireActivity().application)
-        )[MainActivityViewModel::class.java]
->>>>>>> 441aad5502ac2296d61763bbddf9e801ede6436e
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -72,10 +52,7 @@ class LibraryFragment : Fragment() {
     ): View {
         binding = FragmentLibraryBinding.inflate(layoutInflater)
 //        addSong()
-<<<<<<< HEAD
-=======
         initControls()
->>>>>>> 441aad5502ac2296d61763bbddf9e801ede6436e
         tablayout()
         mediaPlayer = MediaPlayer()
         return binding.root
@@ -85,38 +62,12 @@ class LibraryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewpagerCallBack()
         events()
-<<<<<<< HEAD
         initControls()
     }
 
-    private fun initControls() {
-        myViewModel.getNumberOfLoveSong(true).observe(viewLifecycleOwner, Observer {
-            binding.numberOfLoveSong.text = it.toString()
-        })
 
-        myViewModel.getNumberOfSinger().observe(viewLifecycleOwner, Observer {
-            binding.numberOfSinger.text = it.toString()
-        })
+    private fun initControls() {
         sharedViewModel.selectedSong.observe(viewLifecycleOwner, Observer {
-            lastSong = it
-            Log.d("lastsong",lastSong.toString())
-        })
-
-        val adapter = RecentlyListAdapter(object : onClickListener {
-            override fun onClickItem(song: Song) {
-                super.onClickItem(song)
-                sharedViewModel.setStartApp(false)
-                sharedViewModel.setSelectedSong(song)
-                if (lastSong != null && song.id != lastSong?.id) {
-                    song.last = true
-                    lastSong?.last = false
-                    myViewModel.updateSong(lastSong!!)
-=======
-
-    }
-
-    private fun initControls() {
-        shareViewModel.selectedSong.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 lastSong = it
             }
@@ -125,13 +76,12 @@ class LibraryFragment : Fragment() {
         val adapter = RecentlyListAdapter(object : onClickListener {
             override fun onClickItem(song: Song) {
                 super.onClickItem(song)
-                shareViewModel.setStartApp(false)
-                shareViewModel.setSelectedSong(song)
-                if (lastSong != null && song.id != lastSong.id) {
+                sharedViewModel.setStartApp(false)
+                sharedViewModel.setSelectedSong(song)
+                if (lastSong != null && song.id != lastSong!!.id) {
                     song.last = true
-                    lastSong.last = false
-                    myViewModel.updateSong(lastSong)
->>>>>>> 441aad5502ac2296d61763bbddf9e801ede6436e
+                    lastSong!!.last = false
+                    myViewModel.updateSong(lastSong!!)
                     Log.d("name", lastSong.toString())
                 } else {
                     song.last = true
@@ -148,13 +98,8 @@ class LibraryFragment : Fragment() {
 
         myViewModel.loadLocalSongs().observe(viewLifecycleOwner, Observer {
             Log.d("song", it.toString())
-<<<<<<< HEAD
-        })
-=======
-
         })
 
->>>>>>> 441aad5502ac2296d61763bbddf9e801ede6436e
         myViewModel.getSongByRecently(true).observe(viewLifecycleOwner, Observer {
             adapter.setSong(it)
         })

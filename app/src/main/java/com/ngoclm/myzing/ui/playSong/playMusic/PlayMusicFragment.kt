@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.ngoclm.myzing.R
 import com.ngoclm.myzing.databinding.FragmentPlayMusicBinding
-import com.ngoclm.myzing.databinding.FragmentPlaySongBinding
 import com.ngoclm.myzing.ui.MainActivityViewModel
 
 
@@ -30,7 +28,6 @@ class PlayMusicFragment : Fragment() {
     }
 
     private fun addEvent() {
-<<<<<<< HEAD
         shareViewModel.selectedSong.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 Glide.with(this).load(it.img).into(binding.imgSong)
@@ -38,12 +35,6 @@ class PlayMusicFragment : Fragment() {
                 binding.tvSingerName.text = it.singerName
             }
         })
-=======
-//        shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
-//            Glide.with(this).load(it.img).into(binding.imgSong)
-//            binding.tvSongName.text = it.songName
-//            binding.tvSingerName.text = it.singerName
-//        })
->>>>>>> 441aad5502ac2296d61763bbddf9e801ede6436e
+
     }
 }

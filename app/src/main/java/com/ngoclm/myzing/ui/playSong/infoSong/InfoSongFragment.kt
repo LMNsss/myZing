@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.ngoclm.myzing.R
 import com.ngoclm.myzing.databinding.FragmentInfoSongBinding
-import com.ngoclm.myzing.databinding.FragmentInfoSongBindingImpl
 import com.ngoclm.myzing.ui.MainActivityViewModel
 
 
@@ -25,11 +23,10 @@ class InfoSongFragment : Fragment() {
         shareViewModel = activity?.run {
             ViewModelProvider(this)[MainActivityViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
-//        addEvent()
+        addEvent()
         return binding.root
     }
 
-<<<<<<< HEAD
     private fun addEvent(){
         shareViewModel.selectedSong.observe(viewLifecycleOwner, Observer {
             if (it != null) {
@@ -42,17 +39,4 @@ class InfoSongFragment : Fragment() {
             }
         })
     }
-=======
-//    private fun addEvent(){
-//        shareViewModel.getLastSong().observe(viewLifecycleOwner, Observer {
-//            Glide.with(this).load(it.img).into(binding.imgSong)
-//            binding.tvSongName.text = it.songName
-//            binding.tvSingerName.text = it.singerName
-//            binding.tvDetailArtist.text = it.singerName
-//            binding.tvLikeNumber.text = it.loveNumber.toString()
-//            binding.tvListenNumber.text = it.listensNumber.toString()
-//        })
-//    }
->>>>>>> 441aad5502ac2296d61763bbddf9e801ede6436e
-
 }
