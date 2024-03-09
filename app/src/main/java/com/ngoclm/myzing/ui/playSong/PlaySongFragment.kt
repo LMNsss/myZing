@@ -89,12 +89,16 @@ class PlaySongFragment : BottomSheetDialogFragment() {
 
     private fun addEvents() {
         binding.btnDown.setOnClickListener {
-
+            closeFragment()
         }
 
         binding.btnMenu.setOnClickListener {
 
         }
+    }
+
+    private fun closeFragment() {
+        activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
     }
 
 

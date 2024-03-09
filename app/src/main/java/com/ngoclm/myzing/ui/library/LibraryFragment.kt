@@ -64,10 +64,18 @@ class LibraryFragment : Fragment() {
         viewpagerCallBack()
         events()
         initControls()
+//        addSong()
     }
 
 
     private fun initControls() {
+        myViewModel.getNumberOfLoveSong(true).observe(viewLifecycleOwner, Observer {
+            binding.numberOfLoveSong.text = it.toString()
+        })
+
+        myViewModel.getNumberOfSinger().observe(viewLifecycleOwner, Observer {
+            binding.numberOfSinger.text = it.toString()
+        })
         sharedViewModel.selectedSong.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 lastSong = it
@@ -107,7 +115,7 @@ class LibraryFragment : Fragment() {
     }
 
     fun events() {
-        binding.itemDowloaded.setOnClickListener() {
+        binding.itemSinger.setOnClickListener() {
             replaceFragment(DowloadedFragment())
         }
         binding.itemLoveSong.setOnClickListener(){

@@ -1,6 +1,7 @@
 package com.ngoclm.myzing.ui
 
 
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
 
@@ -25,7 +26,7 @@ import com.ngoclm.myzing.ui.zingchart.ZingchartFragment
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mediaPlayer: MediaPlayer
-    private var isPlaying= false
+    private var isPlaying = false
     private var startApp = false
     private lateinit var selectSong: Song
     private val shareViewModel: MainActivityViewModel by lazy {
@@ -42,10 +43,12 @@ class MainActivity : AppCompatActivity() {
         initControls()
         events()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         stopMusic()
     }
+
     private fun initControls() {
         shareViewModel.startApp.observe(this, Observer {
             startApp = it
@@ -54,11 +57,10 @@ class MainActivity : AppCompatActivity() {
 
         shareViewModel.isPlaying.observe(this, Observer {
             isPlaying = it
-            if (isPlaying){
+            if (isPlaying) {
                 binding.icPlay.setImageResource(R.drawable.ic_pause)
                 mediaPlayer.start()
-            }
-            else{
+            } else {
                 binding.icPlay.setImageResource(R.drawable.ic_play_pause)
                 mediaPlayer.pause()
             }
@@ -85,16 +87,35 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
+    @SuppressLint("SetTextI18n")
     private fun events() {
         binding.bottomNavigation.selectedItemId = R.id.btn_discovery
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.btn_library -> replaceFragment(LibraryFragment())
-                R.id.btn_discovery -> replaceFragment(DiscoveryFragment())
-                R.id.btn_zing_chart -> replaceFragment(ZingchartFragment())
-                R.id.btn_radio -> replaceFragment(RadioFragment())
+                R.id.btn_library -> {
+                    replaceFragment(LibraryFragment())
+                    binding.tvTitle.text = "Thư viện"
+                }
+
+                R.id.btn_discovery -> {
+                    replaceFragment(DiscoveryFragment())
+                    binding.tvTitle.text = "Khám phá"
+                }
+
+                R.id.btn_zing_chart -> {
+                    replaceFragment(ZingchartFragment())
+                    binding.tvTitle.text = "#ZingChart"
+                }
+
+                R.id.btn_radio -> {
+                    replaceFragment(RadioFragment())
+                    binding.tvTitle.text = "Radio"
+                }
+
                 else -> {
                     replaceFragment(ProfileFragment())
+                    binding.tvTitle.text = "Cá nhân"
                 }
             }
             true
@@ -110,12 +131,17 @@ class MainActivity : AppCompatActivity() {
                 selectSong.love = false
                 binding.icLove.setImageResource(R.drawable.ic_heart)
                 shareViewModel.updateSong(selectSong)
-                Toast.makeText(this, "Đã bỏ thích bài hát ${selectSong.songName}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Đã bỏ thích bài hát ${selectSong.songName}",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 selectSong.love = true
                 binding.icLove.setImageResource(R.drawable.ic_heart1)
                 shareViewModel.updateSong(selectSong)
-                Toast.makeText(this, "Đã thích bài hát ${selectSong.songName}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Đã thích bài hát ${selectSong.songName}", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
         shareViewModel.firstPlay.observe(this, Observer {

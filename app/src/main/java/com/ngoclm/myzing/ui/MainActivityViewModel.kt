@@ -37,8 +37,6 @@ class MainActivityViewModel(application: Application) : ViewModel() {
         }
     }
 
-
-
     fun secondPlay() {
         firstPlay.value = false
     }
